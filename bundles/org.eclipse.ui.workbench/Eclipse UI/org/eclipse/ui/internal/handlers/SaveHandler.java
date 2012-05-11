@@ -58,7 +58,7 @@ public class SaveHandler extends AbstractSaveHandler {
 		// if view
 		IWorkbenchPart activePart = HandlerUtil.getActivePart(event);
 		WorkbenchPage page = (WorkbenchPage) activePart.getSite().getPage();
-		page.savePart(saveablePart, activePart, false);
+		page.saveSaveable(saveablePart, false, false);
 
 		return null;
 

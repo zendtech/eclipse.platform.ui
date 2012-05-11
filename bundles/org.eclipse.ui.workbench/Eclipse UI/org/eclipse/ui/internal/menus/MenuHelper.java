@@ -75,7 +75,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.ISelectionService;
-import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowPulldownDelegate;
 import org.eclipse.ui.IWorkbenchWindowPulldownDelegate2;
@@ -83,7 +82,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandImageService;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.internal.ActionDescriptor;
-import org.eclipse.ui.internal.OpenPreferencesAction;
 import org.eclipse.ui.internal.PluginAction;
 import org.eclipse.ui.internal.WorkbenchPlugin;
 import org.eclipse.ui.internal.WorkbenchWindow;
@@ -953,42 +951,7 @@ public class MenuHelper {
 	public static MMenuItem createItem(MApplication application, ActionContributionItem item) {
 		IAction action = item.getAction();
 		String id = action.getActionDefinitionId();
-		if (action instanceof OpenPreferencesAction) {
-			for (MCommand command : application.getCommands()) {
-				if (IWorkbenchCommandConstants.WINDOW_PREFERENCES.equals(command.getElementId())) {
-					MHandledMenuItem menuItem = MenuFactoryImpl.eINSTANCE.createHandledMenuItem();
-					menuItem.setCommand(command);
-					menuItem.setLabel(command.getCommandName());
-					menuItem.setIconURI(getIconURI(action.getImageDescriptor(),
-							application.getContext()));
-
-					// extract the mnemonic definition
-					String text = action.getText();
-					int index = text.indexOf('&');
-					if (index != -1 && index != text.length() - 1) {
-						menuItem.setMnemonics(text.substring(index + 1, index + 2));
-					}
-
-					switch (action.getStyle()) {
-					case IAction.AS_CHECK_BOX:
-						menuItem.setType(ItemType.CHECK);
-						menuItem.setSelected(action.isChecked());
-						break;
-					case IAction.AS_RADIO_BUTTON:
-						menuItem.setType(ItemType.RADIO);
-						menuItem.setSelected(action.isChecked());
-						break;
-					default:
-						menuItem.setType(ItemType.PUSH);
-						break;
-					}
-
-					String itemId = item.getId();
-					menuItem.setElementId(itemId == null ? id : itemId);
-					return menuItem;
-				}
-			}
-		} else if (id != null) {
+		if (id != null) {
 
 			for (MCommand command : application.getCommands()) {
 				if (id.equals(command.getElementId())) {
