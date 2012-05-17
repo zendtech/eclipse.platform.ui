@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Sample Category"
+            id="org.eclipse.ui.examples.bug379426">
+      </category>
+      <view
+            name="Sample View"
+            icon="icons/sample.gif"
+            category="org.eclipse.ui.examples.bug379426"
+            class="org.eclipse.ui.examples.bug379426.views.SampleView"
+            id="org.eclipse.ui.examples.bug379426.views.SampleView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.examples.bug379426.views.SampleView?after=additions">
+         <menu
+               label="Analyze">
+            <dynamic
+                  class="org.eclipse.ui.examples.bug379426.views.DynamicItem"
+                  id="org.eclipse.ui.examples.bug379426.dynamic">
+            </dynamic>
+         </menu>
+      </menuContribution>
+   </extension>
+
+</plugin>
