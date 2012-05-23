@@ -199,15 +199,10 @@ public class SampleView extends ViewPart {
 
 	private void hookContextMenu() {
 		MenuManager menuMgr = new MenuManager("#PopupMenu");
-		menuMgr.setRemoveAllWhenShown(true);
-		menuMgr.addMenuListener(new IMenuListener() {
-			public void menuAboutToShow(IMenuManager manager) {
-				SampleView.this.fillContextMenu(manager);
-			}
-		});
+		getSite().registerContextMenu(menuMgr, viewer);
+		SampleView.this.fillContextMenu(menuMgr);
 		Menu menu = menuMgr.createContextMenu(viewer.getControl());
 		viewer.getControl().setMenu(menu);
-		getSite().registerContextMenu(menuMgr, viewer);
 	}
 
 	private void contributeToActionBars() {
