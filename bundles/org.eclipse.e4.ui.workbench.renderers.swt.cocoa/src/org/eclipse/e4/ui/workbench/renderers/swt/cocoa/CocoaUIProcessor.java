@@ -10,11 +10,15 @@
  *******************************************************************************/
 package org.eclipse.e4.ui.workbench.renderers.swt.cocoa;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.ui.bindings.EBindingService;
 import org.eclipse.e4.ui.model.application.MAddon;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.MApplicationFactory;
+import org.eclipse.e4.ui.model.application.commands.MBindingContext;
 import org.eclipse.e4.ui.model.application.commands.MBindingTable;
 import org.eclipse.e4.ui.model.application.commands.MCategory;
 import org.eclipse.e4.ui.model.application.commands.MCommand;
@@ -40,6 +44,9 @@ public class CocoaUIProcessor {
 	protected static final String CONTRIBUTOR_URI = "platform:/fragment/" + FRAGMENT_ID; //$NON-NLS-1$
 	static final String HOST_ID = "org.eclipse.e4.ui.workbench.renderers.swt"; //$NON-NLS-1$
 	protected static final String CONTRIBUTION_URI_PREFIX = "bundleclass://" + HOST_ID; //$NON-NLS-1$
+
+	private static final String COMMAND_ID_CLOSE_DIALOG = "org.eclipse.ui.cocoa.closeDialog"; //$NON-NLS-1$
+	private static final String CLOSE_DIALOG_KEYSEQUENCE = "M1+W"; //$NON-NLS-1$
 
 	@Inject
 	protected MApplication app;
@@ -105,6 +112,16 @@ public class CocoaUIProcessor {
 						"org.eclipse.ui.category.window", "org.eclipse.ui.cocoa.zoomWindow", //$NON-NLS-1$ //$NON-NLS-2$
 						"%command.zoom.name", "%command.zoom.desc", CONTRIBUTOR_URI), //$NON-NLS-1$//$NON-NLS-2$
 				ZoomWindowHandler.class, CONTRIBUTOR_URI);
+
+		// Now add the special Cmd-W dialog helper
+		MCommand closeDialogCommand = defineCommand(
+				"org.eclipse.ui.category.window", //$NON-NLS-1$
+				COMMAND_ID_CLOSE_DIALOG,
+				"%command.closeDialog.name", "%command.closeDialog.desc", CONTRIBUTOR_URI); //$NON-NLS-1$ //$NON-NLS-2$
+		installHandler(closeDialogCommand, CloseDialogHandler.class,
+				CONTRIBUTOR_URI);
+		installKeybinding(EBindingService.DIALOG_CONTEXT_ID,
+				CLOSE_DIALOG_KEYSEQUENCE, closeDialogCommand);
 	}
 
 	/**
@@ -139,16 +156,42 @@ public class CocoaUIProcessor {
 		}
 
 		if (bindingTable == null) {
-			// perhaps we should create it
-			System.err.println("Cannot find table for binding context: " //$NON-NLS-1$
-					+ bindingContextId);
-			return;
+			MBindingContext bindingContext = findBindingContext(bindingContextId);
+			if (bindingContext == null) {
+				System.err
+						.println("Unknown binding context: " + bindingContextId); //$NON-NLS-1$
+				return;
+			}
+			bindingTable = MCommandsFactory.INSTANCE.createBindingTable();
+			bindingTable.setBindingContext(bindingContext);
+			bindingTable.setContributorURI(CONTRIBUTOR_URI);
+			app.getBindingTables().add(bindingTable);
 		}
 
 		MKeyBinding binding = MCommandsFactory.INSTANCE.createKeyBinding();
 		binding.setCommand(cmd);
 		binding.setKeySequence(keysequence);
+		binding.setContributorURI(CONTRIBUTOR_URI);
 		bindingTable.getBindings().add(binding);
+	}
+
+	/**
+	 * Find the matching binding context
+	 * 
+	 * @param bindingContextId
+	 * @return the binding context or {@code null} if not found
+	 */
+	private MBindingContext findBindingContext(String bindingContextId) {
+		List<MBindingContext> contexts = new ArrayList<MBindingContext>();
+		contexts.addAll(app.getBindingContexts());
+		while (!contexts.isEmpty()) {
+			MBindingContext context = contexts.remove(0);
+			if (bindingContextId.equals(context.getElementId())) {
+				return context;
+			}
+			contexts.addAll(context.getChildren());
+		}
+		return null;
 	}
 
 	/**
