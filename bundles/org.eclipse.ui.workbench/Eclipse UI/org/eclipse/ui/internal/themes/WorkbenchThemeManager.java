@@ -13,7 +13,6 @@ package org.eclipse.ui.internal.themes;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.eclipse.core.commands.common.EventManager;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ColorRegistry;
@@ -94,18 +93,7 @@ public class WorkbenchThemeManager extends EventManager implements
 	 * Call dispose when we close.
 	 */
 	private WorkbenchThemeManager() {
-		defaultThemeColorRegistry = new ColorRegistry(PlatformUI.getWorkbench()
-				.getDisplay());
 
-		defaultThemeFontRegistry = new FontRegistry(PlatformUI.getWorkbench()
-				.getDisplay());
-
-		// copy the font values from preferences.
-		FontRegistry jfaceFonts = JFaceResources.getFontRegistry();
-		for (Iterator i = jfaceFonts.getKeySet().iterator(); i.hasNext();) {
-			String key = (String) i.next();
-			defaultThemeFontRegistry.put(key, jfaceFonts.getFontData(key));
-		}
 
 		//Theme might be set via plugin_configuration.ini
 		String themeId = PrefUtil.getAPIPreferenceStore().getDefaultString(IWorkbenchPreferenceConstants.CURRENT_THEME_ID);
@@ -116,11 +104,11 @@ public class WorkbenchThemeManager extends EventManager implements
 			
 		// Check if we are in high contrast mode. If so then set the theme to
 		// the system default
-		if (PlatformUI.getWorkbench().getDisplay() != null) {
+		final Display display = PlatformUI.getWorkbench().getDisplay();
+		if (display != null) {
 			// Determine the high contrast setting before
 			// any access to preferences
-			final boolean[] highContrast = new boolean[] { false };
-			PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+			display.asyncExec(new Runnable() {
 
 				/*
 				 * (non-Javadoc)
@@ -128,20 +116,21 @@ public class WorkbenchThemeManager extends EventManager implements
 				 * @see java.lang.Runnable#run()
 				 */
 				public void run() {
-					highContrast[0] = Display.getCurrent().getHighContrast();
+					boolean highContrast = Display.getCurrent().getHighContrast();
 
-					Display.getCurrent().addListener(SWT.Settings, new Listener() {
+					display.addListener(SWT.Settings, new Listener() {
 						public void handleEvent(Event event) {
 							updateThemes();
 						}
 					});
+					// If in HC, *always* use the system default.
+					// This ignores any default theme set via
+					// plugin_customization.ini
+					if (highContrast) {
+						WorkbenchThemeManager.this.setCurrentTheme(SYSTEM_DEFAULT_THEME);
+					}
 				}
 			});
-			
-			//If in HC, *always* use the system default.
-			//This ignores any default theme set via plugin_customization.ini
-			if (highContrast[0])
-				themeId = SYSTEM_DEFAULT_THEME;
 		}
 
 		PrefUtil.getAPIPreferenceStore().setDefault(
@@ -259,6 +248,10 @@ public class WorkbenchThemeManager extends EventManager implements
 	 * @return the default color registry
 	 */
 	public ColorRegistry getDefaultThemeColorRegistry() {
+		if (defaultThemeColorRegistry == null) {
+			defaultThemeColorRegistry = new ColorRegistry(PlatformUI.getWorkbench().getDisplay());
+		}
+
 		return defaultThemeColorRegistry;
 	}
 
@@ -268,6 +261,16 @@ public class WorkbenchThemeManager extends EventManager implements
 	 * @return the default font registry
 	 */
 	public FontRegistry getDefaultThemeFontRegistry() {
+		if (defaultThemeFontRegistry == null) {
+			defaultThemeFontRegistry = new FontRegistry(PlatformUI.getWorkbench().getDisplay());
+
+			// copy the font values from preferences.
+			FontRegistry jfaceFonts = JFaceResources.getFontRegistry();
+			for (Iterator i = jfaceFonts.getKeySet().iterator(); i.hasNext();) {
+				String key = (String) i.next();
+				defaultThemeFontRegistry.put(key, jfaceFonts.getFontData(key));
+			}
+		}
 		return defaultThemeFontRegistry;
 	}
 
