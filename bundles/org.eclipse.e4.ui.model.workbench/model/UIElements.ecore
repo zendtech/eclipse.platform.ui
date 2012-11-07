@@ -27,6 +27,7 @@
     <eGenericSuperTypes eClassifier="#//ui/menu/ToolBarContributions"/>
     <eGenericSuperTypes eClassifier="#//ui/menu/TrimContributions"/>
     <eGenericSuperTypes eClassifier="#//ui/SnippetContainer"/>
+    <eGenericSuperTypes eClassifier="#//ui/LifecycledElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -227,6 +228,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="snippets" upperBound="-1"
           eType="#//ui/UIElement" containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LifecycledElement" abstract="true"
+        interface="true" eSuperTypes="#//ui/UIElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lifecyleURIs" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
     <eSubpackages name="menu" nsURI="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu"
         nsPrefix="menu">
       <eClassifiers xsi:type="ecore:EEnum" name="ItemType">
@@ -261,6 +267,7 @@
         <eGenericSuperTypes eClassifier="#//ui/ElementContainer">
           <eTypeArguments eClassifier="#//ui/menu/MenuElement"/>
         </eGenericSuperTypes>
+        <eGenericSuperTypes eClassifier="#//ui/LifecycledElement"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="MenuContribution">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="positionInParent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -397,6 +404,7 @@
         <eGenericSuperTypes eClassifier="#//commands/HandlerContainer"/>
         <eGenericSuperTypes eClassifier="#//commands/Bindings"/>
         <eGenericSuperTypes eClassifier="#//ui/SnippetContainer"/>
+        <eGenericSuperTypes eClassifier="#//ui/LifecycledElement"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TrimmedWindow" eSuperTypes="#//ui/basic/Window">
         <eStructuralFeatures xsi:type="ecore:EReference" name="trimBars" upperBound="-1"
@@ -432,6 +440,7 @@
         </eGenericSuperTypes>
         <eGenericSuperTypes eClassifier="#//ui/UILabel"/>
         <eGenericSuperTypes eClassifier="#//ui/Context"/>
+        <eGenericSuperTypes eClassifier="#//ui/LifecycledElement"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="PerspectiveStack">
         <eGenericSuperTypes eClassifier="#//ui/UIElement"/>

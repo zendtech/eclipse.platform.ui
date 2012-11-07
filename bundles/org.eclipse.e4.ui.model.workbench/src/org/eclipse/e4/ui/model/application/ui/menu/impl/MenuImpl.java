@@ -13,6 +13,7 @@ package org.eclipse.e4.ui.model.application.ui.menu.impl;
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
+import org.eclipse.e4.ui.model.application.ui.MLifecycledElement;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.impl.UiPackageImpl;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -36,6 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.menu.impl.MenuImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.menu.impl.MenuImpl#getSelectedElement <em>Selected Element</em>}</li>
+ *   <li>{@link org.eclipse.e4.ui.model.application.ui.menu.impl.MenuImpl#getLifecyleURIs <em>Lifecyle UR Is</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.menu.impl.MenuImpl#isEnabled <em>Enabled</em>}</li>
  * </ul>
  * </p>
@@ -62,6 +65,16 @@ public class MenuImpl extends MenuElementImpl implements MMenu {
 	 * @ordered
 	 */
 	protected MMenuElement selectedElement;
+
+	/**
+	 * The cached value of the '{@link #getLifecyleURIs() <em>Lifecyle UR Is</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLifecyleURIs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> lifecyleURIs;
 
 	/**
 	 * The default value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
@@ -157,6 +170,18 @@ public class MenuImpl extends MenuElementImpl implements MMenu {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<String> getLifecyleURIs() {
+		if (lifecyleURIs == null) {
+			lifecyleURIs = new EDataTypeUniqueEList<String>(String.class, this, MenuPackageImpl.MENU__LIFECYLE_UR_IS);
+		}
+		return lifecyleURIs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -215,6 +240,8 @@ public class MenuImpl extends MenuElementImpl implements MMenu {
 			case MenuPackageImpl.MENU__SELECTED_ELEMENT:
 				if (resolve) return getSelectedElement();
 				return basicGetSelectedElement();
+			case MenuPackageImpl.MENU__LIFECYLE_UR_IS:
+				return getLifecyleURIs();
 			case MenuPackageImpl.MENU__ENABLED:
 				return isEnabled();
 		}
@@ -237,6 +264,10 @@ public class MenuImpl extends MenuElementImpl implements MMenu {
 			case MenuPackageImpl.MENU__SELECTED_ELEMENT:
 				setSelectedElement((MMenuElement)newValue);
 				return;
+			case MenuPackageImpl.MENU__LIFECYLE_UR_IS:
+				getLifecyleURIs().clear();
+				getLifecyleURIs().addAll((Collection<? extends String>)newValue);
+				return;
 			case MenuPackageImpl.MENU__ENABLED:
 				setEnabled((Boolean)newValue);
 				return;
@@ -258,6 +289,9 @@ public class MenuImpl extends MenuElementImpl implements MMenu {
 			case MenuPackageImpl.MENU__SELECTED_ELEMENT:
 				setSelectedElement((MMenuElement)null);
 				return;
+			case MenuPackageImpl.MENU__LIFECYLE_UR_IS:
+				getLifecyleURIs().clear();
+				return;
 			case MenuPackageImpl.MENU__ENABLED:
 				setEnabled(ENABLED_EDEFAULT);
 				return;
@@ -277,6 +311,8 @@ public class MenuImpl extends MenuElementImpl implements MMenu {
 				return children != null && !children.isEmpty();
 			case MenuPackageImpl.MENU__SELECTED_ELEMENT:
 				return selectedElement != null;
+			case MenuPackageImpl.MENU__LIFECYLE_UR_IS:
+				return lifecyleURIs != null && !lifecyleURIs.isEmpty();
 			case MenuPackageImpl.MENU__ENABLED:
 				return enabled != ENABLED_EDEFAULT;
 		}
@@ -297,6 +333,12 @@ public class MenuImpl extends MenuElementImpl implements MMenu {
 				default: return -1;
 			}
 		}
+		if (baseClass == MLifecycledElement.class) {
+			switch (derivedFeatureID) {
+				case MenuPackageImpl.MENU__LIFECYLE_UR_IS: return UiPackageImpl.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -314,6 +356,12 @@ public class MenuImpl extends MenuElementImpl implements MMenu {
 				default: return -1;
 			}
 		}
+		if (baseClass == MLifecycledElement.class) {
+			switch (baseFeatureID) {
+				case UiPackageImpl.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS: return MenuPackageImpl.MENU__LIFECYLE_UR_IS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -327,7 +375,9 @@ public class MenuImpl extends MenuElementImpl implements MMenu {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (enabled: "); //$NON-NLS-1$
+		result.append(" (lifecyleURIs: "); //$NON-NLS-1$
+		result.append(lifecyleURIs);
+		result.append(", enabled: "); //$NON-NLS-1$
 		result.append(enabled);
 		result.append(')');
 		return result.toString();

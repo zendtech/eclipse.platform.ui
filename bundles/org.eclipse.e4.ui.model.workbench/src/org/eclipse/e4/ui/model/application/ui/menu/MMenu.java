@@ -11,6 +11,7 @@
 package org.eclipse.e4.ui.model.application.ui.menu;
 
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
+import org.eclipse.e4.ui.model.application.ui.MLifecycledElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +28,7 @@ import org.eclipse.e4.ui.model.application.ui.MElementContainer;
  * @model
  * @generated
  */
-public interface MMenu extends MMenuElement, MElementContainer<MMenuElement> {
+public interface MMenu extends MMenuElement, MElementContainer<MMenuElement>, MLifecycledElement {
 	/**
 	 * Returns the value of the '<em><b>Enabled</b></em>' attribute.
 	 * The default value is <code>"true"</code>.

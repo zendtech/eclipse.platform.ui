@@ -21,6 +21,7 @@ import org.eclipse.e4.ui.model.application.ui.MGenericStack;
 import org.eclipse.e4.ui.model.application.ui.MGenericTile;
 import org.eclipse.e4.ui.model.application.ui.MGenericTrimContainer;
 import org.eclipse.e4.ui.model.application.ui.MInput;
+import org.eclipse.e4.ui.model.application.ui.MLifecycledElement;
 import org.eclipse.e4.ui.model.application.ui.MSnippetContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.MUILabel;
@@ -1442,6 +1443,187 @@ public class UiPackageImpl extends EPackageImpl {
 	public static final int SNIPPET_CONTAINER_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.e4.ui.model.application.ui.MLifecycledElement <em>Lifecycled Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.e4.ui.model.application.ui.MLifecycledElement
+	 * @see org.eclipse.e4.ui.model.application.ui.impl.UiPackageImpl#getLifecycledElement()
+	 * @generated
+	 */
+	public static final int LIFECYCLED_ELEMENT = 12;
+
+	/**
+	 * The feature id for the '<em><b>Element Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__ELEMENT_ID = UI_ELEMENT__ELEMENT_ID;
+
+	/**
+	 * The feature id for the '<em><b>Persisted State</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__PERSISTED_STATE = UI_ELEMENT__PERSISTED_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__TAGS = UI_ELEMENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Contributor URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__CONTRIBUTOR_URI = UI_ELEMENT__CONTRIBUTOR_URI;
+
+	/**
+	 * The feature id for the '<em><b>Transient Data</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__TRANSIENT_DATA = UI_ELEMENT__TRANSIENT_DATA;
+
+	/**
+	 * The feature id for the '<em><b>Widget</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__WIDGET = UI_ELEMENT__WIDGET;
+
+	/**
+	 * The feature id for the '<em><b>Renderer</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__RENDERER = UI_ELEMENT__RENDERER;
+
+	/**
+	 * The feature id for the '<em><b>To Be Rendered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__TO_BE_RENDERED = UI_ELEMENT__TO_BE_RENDERED;
+
+	/**
+	 * The feature id for the '<em><b>On Top</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__ON_TOP = UI_ELEMENT__ON_TOP;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__VISIBLE = UI_ELEMENT__VISIBLE;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__PARENT = UI_ELEMENT__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Container Data</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__CONTAINER_DATA = UI_ELEMENT__CONTAINER_DATA;
+
+	/**
+	 * The feature id for the '<em><b>Cur Shared Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__CUR_SHARED_REF = UI_ELEMENT__CUR_SHARED_REF;
+
+	/**
+	 * The feature id for the '<em><b>Visible When</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__VISIBLE_WHEN = UI_ELEMENT__VISIBLE_WHEN;
+
+	/**
+	 * The feature id for the '<em><b>Accessibility Phrase</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__ACCESSIBILITY_PHRASE = UI_ELEMENT__ACCESSIBILITY_PHRASE;
+
+	/**
+	 * The feature id for the '<em><b>Lifecyle UR Is</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT__LIFECYLE_UR_IS = UI_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Lifecycled Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT_FEATURE_COUNT = UI_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Localized Accessibility Phrase</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT___GET_LOCALIZED_ACCESSIBILITY_PHRASE = UI_ELEMENT___GET_LOCALIZED_ACCESSIBILITY_PHRASE;
+
+	/**
+	 * The number of operations of the '<em>Lifecycled Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIFECYCLED_ELEMENT_OPERATION_COUNT = UI_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.e4.ui.model.application.ui.SideValue <em>Side Value</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1449,7 +1631,7 @@ public class UiPackageImpl extends EPackageImpl {
 	 * @see org.eclipse.e4.ui.model.application.ui.impl.UiPackageImpl#getSideValue()
 	 * @generated
 	 */
-	public static final int SIDE_VALUE = 12;
+	public static final int SIDE_VALUE = 13;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1534,6 +1716,13 @@ public class UiPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	private EClass snippetContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass lifecycledElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2142,6 +2331,33 @@ public class UiPackageImpl extends EPackageImpl {
 
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.e4.ui.model.application.ui.MLifecycledElement <em>Lifecycled Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Lifecycled Element</em>'.
+	 * @see org.eclipse.e4.ui.model.application.ui.MLifecycledElement
+	 * @generated
+	 */
+	public EClass getLifecycledElement() {
+		return lifecycledElementEClass;
+	}
+
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.e4.ui.model.application.ui.MLifecycledElement#getLifecyleURIs <em>Lifecyle UR Is</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Lifecyle UR Is</em>'.
+	 * @see org.eclipse.e4.ui.model.application.ui.MLifecycledElement#getLifecyleURIs()
+	 * @see #getLifecycledElement()
+	 * @generated
+	 */
+	public EAttribute getLifecycledElement_LifecyleURIs() {
+		return (EAttribute)lifecycledElementEClass.getEStructuralFeatures().get(0);
+	}
+
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.e4.ui.model.application.ui.SideValue <em>Side Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2235,6 +2451,9 @@ public class UiPackageImpl extends EPackageImpl {
 		snippetContainerEClass = createEClass(SNIPPET_CONTAINER);
 		createEReference(snippetContainerEClass, SNIPPET_CONTAINER__SNIPPETS);
 
+		lifecycledElementEClass = createEClass(LIFECYCLED_ELEMENT);
+		createEAttribute(lifecycledElementEClass, LIFECYCLED_ELEMENT__LIFECYLE_UR_IS);
+
 		// Create enums
 		sideValueEEnum = createEEnum(SIDE_VALUE);
 	}
@@ -2306,6 +2525,7 @@ public class UiPackageImpl extends EPackageImpl {
 		genericTrimContainerEClass.getEGenericSuperTypes().add(g1);
 		expressionEClass.getESuperTypes().add(theApplicationPackage.getApplicationElement());
 		coreExpressionEClass.getESuperTypes().add(this.getExpression());
+		lifecycledElementEClass.getESuperTypes().add(this.getUIElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(contextEClass, MContext.class, "Context", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -2367,6 +2587,9 @@ public class UiPackageImpl extends EPackageImpl {
 
 		initEClass(snippetContainerEClass, MSnippetContainer.class, "SnippetContainer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getSnippetContainer_Snippets(), this.getUIElement(), null, "snippets", null, 0, -1, MSnippetContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(lifecycledElementEClass, MLifecycledElement.class, "LifecycledElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getLifecycledElement_LifecyleURIs(), ecorePackage.getEString(), "lifecyleURIs", null, 0, -1, MLifecycledElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		// Initialize enums and add enum literals
 		initEEnum(sideValueEEnum, SideValue.class, "SideValue"); //$NON-NLS-1$
@@ -2732,6 +2955,24 @@ public class UiPackageImpl extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EReference SNIPPET_CONTAINER__SNIPPETS = eINSTANCE.getSnippetContainer_Snippets();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.e4.ui.model.application.ui.MLifecycledElement <em>Lifecycled Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.e4.ui.model.application.ui.MLifecycledElement
+		 * @see org.eclipse.e4.ui.model.application.ui.impl.UiPackageImpl#getLifecycledElement()
+		 * @generated
+		 */
+		public static final EClass LIFECYCLED_ELEMENT = eINSTANCE.getLifecycledElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Lifecyle UR Is</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EAttribute LIFECYCLED_ELEMENT__LIFECYLE_UR_IS = eINSTANCE.getLifecycledElement_LifecyleURIs();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.e4.ui.model.application.ui.SideValue <em>Side Value</em>}' enum.

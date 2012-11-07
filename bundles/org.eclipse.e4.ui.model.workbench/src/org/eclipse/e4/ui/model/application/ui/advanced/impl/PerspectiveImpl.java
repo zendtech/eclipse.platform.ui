@@ -19,6 +19,7 @@ import org.eclipse.e4.ui.model.LocalizationHelper;
 import org.eclipse.e4.ui.model.application.impl.ApplicationPackageImpl;
 import org.eclipse.e4.ui.model.application.impl.StringToStringMapImpl;
 import org.eclipse.e4.ui.model.application.ui.MContext;
+import org.eclipse.e4.ui.model.application.ui.MLifecycledElement;
 import org.eclipse.e4.ui.model.application.ui.MUILabel;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartSashContainerElement;
@@ -51,6 +52,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.advanced.impl.PerspectiveImpl#getContext <em>Context</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.advanced.impl.PerspectiveImpl#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.advanced.impl.PerspectiveImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.eclipse.e4.ui.model.application.ui.advanced.impl.PerspectiveImpl#getLifecyleURIs <em>Lifecyle UR Is</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.advanced.impl.PerspectiveImpl#getWindows <em>Windows</em>}</li>
  * </ul>
  * </p>
@@ -157,6 +159,16 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 	 * @ordered
 	 */
 	protected EMap<String, String> properties;
+
+	/**
+	 * The cached value of the '{@link #getLifecyleURIs() <em>Lifecyle UR Is</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLifecyleURIs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> lifecyleURIs;
 
 	/**
 	 * The cached value of the '{@link #getWindows() <em>Windows</em>}' containment reference list.
@@ -300,6 +312,18 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<String> getLifecyleURIs() {
+		if (lifecyleURIs == null) {
+			lifecyleURIs = new EDataTypeUniqueEList<String>(String.class, this, AdvancedPackageImpl.PERSPECTIVE__LIFECYLE_UR_IS);
+		}
+		return lifecyleURIs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public List<MWindow> getWindows() {
 		if (windows == null) {
 			windows = new EObjectContainmentEList<MWindow>(MWindow.class, this, AdvancedPackageImpl.PERSPECTIVE__WINDOWS);
@@ -360,6 +384,8 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 			case AdvancedPackageImpl.PERSPECTIVE__PROPERTIES:
 				if (coreType) return ((EMap.InternalMapView<String, String>)getProperties()).eMap();
 				else return getProperties();
+			case AdvancedPackageImpl.PERSPECTIVE__LIFECYLE_UR_IS:
+				return getLifecyleURIs();
 			case AdvancedPackageImpl.PERSPECTIVE__WINDOWS:
 				return getWindows();
 		}
@@ -393,6 +419,10 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 				return;
 			case AdvancedPackageImpl.PERSPECTIVE__PROPERTIES:
 				((EStructuralFeature.Setting)((EMap.InternalMapView<String, String>)getProperties()).eMap()).set(newValue);
+				return;
+			case AdvancedPackageImpl.PERSPECTIVE__LIFECYLE_UR_IS:
+				getLifecyleURIs().clear();
+				getLifecyleURIs().addAll((Collection<? extends String>)newValue);
 				return;
 			case AdvancedPackageImpl.PERSPECTIVE__WINDOWS:
 				getWindows().clear();
@@ -428,6 +458,9 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 			case AdvancedPackageImpl.PERSPECTIVE__PROPERTIES:
 				getProperties().clear();
 				return;
+			case AdvancedPackageImpl.PERSPECTIVE__LIFECYLE_UR_IS:
+				getLifecyleURIs().clear();
+				return;
 			case AdvancedPackageImpl.PERSPECTIVE__WINDOWS:
 				getWindows().clear();
 				return;
@@ -455,6 +488,8 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 				return variables != null && !variables.isEmpty();
 			case AdvancedPackageImpl.PERSPECTIVE__PROPERTIES:
 				return properties != null && !properties.isEmpty();
+			case AdvancedPackageImpl.PERSPECTIVE__LIFECYLE_UR_IS:
+				return lifecyleURIs != null && !lifecyleURIs.isEmpty();
 			case AdvancedPackageImpl.PERSPECTIVE__WINDOWS:
 				return windows != null && !windows.isEmpty();
 		}
@@ -484,6 +519,12 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 				default: return -1;
 			}
 		}
+		if (baseClass == MLifecycledElement.class) {
+			switch (derivedFeatureID) {
+				case AdvancedPackageImpl.PERSPECTIVE__LIFECYLE_UR_IS: return UiPackageImpl.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -510,6 +551,12 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 				default: return -1;
 			}
 		}
+		if (baseClass == MLifecycledElement.class) {
+			switch (baseFeatureID) {
+				case UiPackageImpl.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS: return AdvancedPackageImpl.PERSPECTIVE__LIFECYLE_UR_IS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -528,6 +575,11 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 			}
 		}
 		if (baseClass == MContext.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == MLifecycledElement.class) {
 			switch (baseOperationID) {
 				default: return -1;
 			}
@@ -571,6 +623,8 @@ public class PerspectiveImpl extends ElementContainerImpl<MPartSashContainerElem
 		result.append(context);
 		result.append(", variables: "); //$NON-NLS-1$
 		result.append(variables);
+		result.append(", lifecyleURIs: "); //$NON-NLS-1$
+		result.append(lifecyleURIs);
 		result.append(')');
 		return result.toString();
 	}

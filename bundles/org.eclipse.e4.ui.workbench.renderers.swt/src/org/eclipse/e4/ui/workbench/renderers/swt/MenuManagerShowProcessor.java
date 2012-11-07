@@ -13,6 +13,8 @@ package org.eclipse.e4.ui.workbench.renderers.swt;
 import java.util.HashMap;
 import javax.inject.Inject;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.di.LifecycleAboutToHide;
+import org.eclipse.e4.ui.di.LifecycleAboutToShow;
 import org.eclipse.e4.ui.internal.workbench.swt.AbstractPartRenderer;
 import org.eclipse.e4.ui.internal.workbench.swt.Policy;
 import org.eclipse.e4.ui.internal.workbench.swt.WorkbenchSWTActivator;
@@ -20,6 +22,7 @@ import org.eclipse.e4.ui.model.application.ui.MContext;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MPopupMenu;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.LifecycleHelper;
 import org.eclipse.e4.ui.workbench.swt.factories.IRendererFactory;
 import org.eclipse.jface.action.IMenuListener2;
 import org.eclipse.jface.action.IMenuManager;
@@ -65,6 +68,10 @@ public class MenuManagerShowProcessor implements IMenuListener2 {
 		MenuManager menuManager = (MenuManager) manager;
 		final MMenu menuModel = renderer.getMenuModel(menuManager);
 		final Menu menu = menuManager.getMenu();
+
+		LifecycleHelper.invokeLifecycleHandlers(modelService, menuModel,
+				LifecycleAboutToShow.class);
+
 		if (menuModel != null && menuManager != null) {
 			cleanUp(menu, menuModel, menuManager);
 		}
@@ -96,6 +103,10 @@ public class MenuManagerShowProcessor implements IMenuListener2 {
 		}
 		MenuManager menuManager = (MenuManager) manager;
 		final MMenu menuModel = renderer.getMenuModel(menuManager);
+
+		LifecycleHelper.invokeLifecycleHandlers(modelService, menuModel,
+				LifecycleAboutToHide.class);
+
 		final Menu menu = menuManager.getMenu();
 		if (menuModel != null) {
 			showMenu(menu, menuModel, menuManager);

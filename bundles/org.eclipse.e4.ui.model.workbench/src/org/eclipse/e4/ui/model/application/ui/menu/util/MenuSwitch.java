@@ -14,9 +14,11 @@ import org.eclipse.e4.ui.model.application.MApplicationElement;
 import org.eclipse.e4.ui.model.application.MContribution;
 import org.eclipse.e4.ui.model.application.ui.MContext;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
+import org.eclipse.e4.ui.model.application.ui.MLifecycledElement;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.MUILabel;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimElement;
+import org.eclipse.e4.ui.model.application.ui.menu.*;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledItem;
@@ -162,6 +164,7 @@ public class MenuSwitch<T1> extends Switch<T1> {
 				T1 result = caseMenu(menu);
 				if (result == null) result = caseMenuElement(menu);
 				if (result == null) result = caseElementContainer(menu);
+				if (result == null) result = caseLifecycledElement(menu);
 				if (result == null) result = caseUIElement(menu);
 				if (result == null) result = caseUILabel(menu);
 				if (result == null) result = caseApplicationElement(menu);
@@ -184,6 +187,7 @@ public class MenuSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseContext(popupMenu);
 				if (result == null) result = caseMenuElement(popupMenu);
 				if (result == null) result = caseElementContainer(popupMenu);
+				if (result == null) result = caseLifecycledElement(popupMenu);
 				if (result == null) result = caseUIElement(popupMenu);
 				if (result == null) result = caseUILabel(popupMenu);
 				if (result == null) result = caseApplicationElement(popupMenu);
@@ -303,6 +307,7 @@ public class MenuSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseMenu(renderedMenu);
 				if (result == null) result = caseMenuElement(renderedMenu);
 				if (result == null) result = caseElementContainer(renderedMenu);
+				if (result == null) result = caseLifecycledElement(renderedMenu);
 				if (result == null) result = caseUIElement(renderedMenu);
 				if (result == null) result = caseUILabel(renderedMenu);
 				if (result == null) result = caseApplicationElement(renderedMenu);
@@ -403,6 +408,7 @@ public class MenuSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseMenu(opaqueMenu);
 				if (result == null) result = caseMenuElement(opaqueMenu);
 				if (result == null) result = caseElementContainer(opaqueMenu);
+				if (result == null) result = caseLifecycledElement(opaqueMenu);
 				if (result == null) result = caseUIElement(opaqueMenu);
 				if (result == null) result = caseUILabel(opaqueMenu);
 				if (result == null) result = caseApplicationElement(opaqueMenu);
@@ -905,6 +911,21 @@ public class MenuSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public <T extends MUIElement> T1 caseElementContainer(MElementContainer<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Lifecycled Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Lifecycled Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseLifecycledElement(MLifecycledElement object) {
 		return null;
 	}
 

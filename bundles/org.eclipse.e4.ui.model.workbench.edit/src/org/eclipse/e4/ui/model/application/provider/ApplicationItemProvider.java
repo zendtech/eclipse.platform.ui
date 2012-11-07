@@ -73,6 +73,7 @@ public class ApplicationItemProvider extends ElementContainerItemProvider
 			addContextPropertyDescriptor(object);
 			addVariablesPropertyDescriptor(object);
 			addBindingContextsPropertyDescriptor(object);
+			addLifecyleURIsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -139,6 +140,28 @@ public class ApplicationItemProvider extends ElementContainerItemProvider
 				 false,
 				 false,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Lifecyle UR Is feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLifecyleURIsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LifecycledElement_lifecyleURIs_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_LifecycledElement_lifecyleURIs_feature", "_UI_LifecycledElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 UiPackageImpl.Literals.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -222,6 +245,7 @@ public class ApplicationItemProvider extends ElementContainerItemProvider
 			case ApplicationPackageImpl.APPLICATION__CONTEXT:
 			case ApplicationPackageImpl.APPLICATION__VARIABLES:
 			case ApplicationPackageImpl.APPLICATION__BINDING_CONTEXTS:
+			case ApplicationPackageImpl.APPLICATION__LIFECYLE_UR_IS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ApplicationPackageImpl.APPLICATION__PROPERTIES:

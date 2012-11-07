@@ -1551,13 +1551,22 @@ public class MenuPackageImpl extends EPackageImpl {
 	public static final int MENU__SELECTED_ELEMENT = MENU_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Lifecyle UR Is</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MENU__LIFECYLE_UR_IS = MENU_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Enabled</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MENU__ENABLED = MENU_ELEMENT_FEATURE_COUNT + 2;
+	public static final int MENU__ENABLED = MENU_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Menu</em>' class.
@@ -1566,7 +1575,7 @@ public class MenuPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MENU_FEATURE_COUNT = MENU_ELEMENT_FEATURE_COUNT + 3;
+	public static final int MENU_FEATURE_COUNT = MENU_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Get Localized Accessibility Phrase</em>' operation.
@@ -2019,6 +2028,15 @@ public class MenuPackageImpl extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int POPUP_MENU__SELECTED_ELEMENT = MENU__SELECTED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Lifecyle UR Is</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int POPUP_MENU__LIFECYLE_UR_IS = MENU__LIFECYLE_UR_IS;
 
 	/**
 	 * The feature id for the '<em><b>Enabled</b></em>' attribute.
@@ -4444,6 +4462,15 @@ public class MenuPackageImpl extends EPackageImpl {
 	public static final int RENDERED_MENU__SELECTED_ELEMENT = MENU__SELECTED_ELEMENT;
 
 	/**
+	 * The feature id for the '<em><b>Lifecyle UR Is</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RENDERED_MENU__LIFECYLE_UR_IS = MENU__LIFECYLE_UR_IS;
+
+	/**
 	 * The feature id for the '<em><b>Enabled</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6452,6 +6479,15 @@ public class MenuPackageImpl extends EPackageImpl {
 	public static final int OPAQUE_MENU__SELECTED_ELEMENT = MENU__SELECTED_ELEMENT;
 
 	/**
+	 * The feature id for the '<em><b>Lifecyle UR Is</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPAQUE_MENU__LIFECYLE_UR_IS = MENU__LIFECYLE_UR_IS;
+
+	/**
 	 * The feature id for the '<em><b>Enabled</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7696,6 +7732,8 @@ public class MenuPackageImpl extends EPackageImpl {
 		g1 = createEGenericType(theUiPackage.getElementContainer());
 		EGenericType g2 = createEGenericType(this.getMenuElement());
 		g1.getETypeArguments().add(g2);
+		menuEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theUiPackage.getLifecycledElement());
 		menuEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(theUiPackage.getElementContainer());
 		g2 = createEGenericType(this.getMenuElement());

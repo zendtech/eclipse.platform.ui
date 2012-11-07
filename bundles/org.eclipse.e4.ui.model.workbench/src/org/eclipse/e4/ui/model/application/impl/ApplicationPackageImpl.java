@@ -470,13 +470,22 @@ public class ApplicationPackageImpl extends EPackageImpl {
 	public static final int APPLICATION__SNIPPETS = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Lifecyle UR Is</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int APPLICATION__LIFECYLE_UR_IS = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 12;
+
+	/**
 	 * The feature id for the '<em><b>Commands</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int APPLICATION__COMMANDS = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 12;
+	public static final int APPLICATION__COMMANDS = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Addons</b></em>' containment reference list.
@@ -485,7 +494,7 @@ public class ApplicationPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int APPLICATION__ADDONS = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 13;
+	public static final int APPLICATION__ADDONS = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Categories</b></em>' containment reference list.
@@ -494,7 +503,7 @@ public class ApplicationPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int APPLICATION__CATEGORIES = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 14;
+	public static final int APPLICATION__CATEGORIES = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>Application</em>' class.
@@ -503,7 +512,7 @@ public class ApplicationPackageImpl extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int APPLICATION_FEATURE_COUNT = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 15;
+	public static final int APPLICATION_FEATURE_COUNT = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 16;
 
 	/**
 	 * The operation id for the '<em>Get Localized Accessibility Phrase</em>' operation.
@@ -1291,6 +1300,8 @@ public class ApplicationPackageImpl extends EPackageImpl {
 		g1 = createEGenericType(theMenuPackage.getTrimContributions());
 		applicationEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(theUiPackage.getSnippetContainer());
+		applicationEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theUiPackage.getLifecycledElement());
 		applicationEClass.getEGenericSuperTypes().add(g1);
 		contributionEClass.getESuperTypes().add(this.getApplicationElement());
 		addonEClass.getESuperTypes().add(this.getContribution());

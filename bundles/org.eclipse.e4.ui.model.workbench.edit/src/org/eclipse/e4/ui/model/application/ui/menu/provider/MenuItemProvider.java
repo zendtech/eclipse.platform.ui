@@ -70,6 +70,7 @@ public class MenuItemProvider
 			super.getPropertyDescriptors(object);
 
 			addSelectedElementPropertyDescriptor(object);
+			addLifecyleURIsPropertyDescriptor(object);
 			addEnabledPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -93,6 +94,28 @@ public class MenuItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Lifecyle UR Is feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLifecyleURIsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LifecycledElement_lifecyleURIs_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_LifecycledElement_lifecyleURIs_feature", "_UI_LifecycledElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 UiPackageImpl.Literals.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -186,6 +209,7 @@ public class MenuItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(MMenu.class)) {
+			case MenuPackageImpl.MENU__LIFECYLE_UR_IS:
 			case MenuPackageImpl.MENU__ENABLED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

@@ -29,6 +29,7 @@ import org.eclipse.e4.ui.model.application.descriptor.basic.MPartDescriptor;
 import org.eclipse.e4.ui.model.application.descriptor.basic.MPartDescriptorContainer;
 import org.eclipse.e4.ui.model.application.descriptor.basic.impl.BasicPackageImpl;
 import org.eclipse.e4.ui.model.application.ui.MContext;
+import org.eclipse.e4.ui.model.application.ui.MLifecycledElement;
 import org.eclipse.e4.ui.model.application.ui.MSnippetContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
@@ -74,6 +75,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.eclipse.e4.ui.model.application.impl.ApplicationImpl#getToolBarContributions <em>Tool Bar Contributions</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.impl.ApplicationImpl#getTrimContributions <em>Trim Contributions</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.impl.ApplicationImpl#getSnippets <em>Snippets</em>}</li>
+ *   <li>{@link org.eclipse.e4.ui.model.application.impl.ApplicationImpl#getLifecyleURIs <em>Lifecyle UR Is</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.impl.ApplicationImpl#getCommands <em>Commands</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.impl.ApplicationImpl#getAddons <em>Addons</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.impl.ApplicationImpl#getCategories <em>Categories</em>}</li>
@@ -212,6 +214,16 @@ public class ApplicationImpl extends ElementContainerImpl<MWindow> implements MA
 	 * @ordered
 	 */
 	protected EList<MUIElement> snippets;
+
+	/**
+	 * The cached value of the '{@link #getLifecyleURIs() <em>Lifecyle UR Is</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLifecyleURIs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> lifecyleURIs;
 
 	/**
 	 * The cached value of the '{@link #getCommands() <em>Commands</em>}' containment reference list.
@@ -420,6 +432,18 @@ public class ApplicationImpl extends ElementContainerImpl<MWindow> implements MA
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<String> getLifecyleURIs() {
+		if (lifecyleURIs == null) {
+			lifecyleURIs = new EDataTypeUniqueEList<String>(String.class, this, ApplicationPackageImpl.APPLICATION__LIFECYLE_UR_IS);
+		}
+		return lifecyleURIs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public List<MCommand> getCommands() {
 		if (commands == null) {
 			commands = new EObjectContainmentEList<MCommand>(MCommand.class, this, ApplicationPackageImpl.APPLICATION__COMMANDS);
@@ -520,6 +544,8 @@ public class ApplicationImpl extends ElementContainerImpl<MWindow> implements MA
 				return getTrimContributions();
 			case ApplicationPackageImpl.APPLICATION__SNIPPETS:
 				return getSnippets();
+			case ApplicationPackageImpl.APPLICATION__LIFECYLE_UR_IS:
+				return getLifecyleURIs();
 			case ApplicationPackageImpl.APPLICATION__COMMANDS:
 				return getCommands();
 			case ApplicationPackageImpl.APPLICATION__ADDONS:
@@ -585,6 +611,10 @@ public class ApplicationImpl extends ElementContainerImpl<MWindow> implements MA
 				getSnippets().clear();
 				getSnippets().addAll((Collection<? extends MUIElement>)newValue);
 				return;
+			case ApplicationPackageImpl.APPLICATION__LIFECYLE_UR_IS:
+				getLifecyleURIs().clear();
+				getLifecyleURIs().addAll((Collection<? extends String>)newValue);
+				return;
 			case ApplicationPackageImpl.APPLICATION__COMMANDS:
 				getCommands().clear();
 				getCommands().addAll((Collection<? extends MCommand>)newValue);
@@ -645,6 +675,9 @@ public class ApplicationImpl extends ElementContainerImpl<MWindow> implements MA
 			case ApplicationPackageImpl.APPLICATION__SNIPPETS:
 				getSnippets().clear();
 				return;
+			case ApplicationPackageImpl.APPLICATION__LIFECYLE_UR_IS:
+				getLifecyleURIs().clear();
+				return;
 			case ApplicationPackageImpl.APPLICATION__COMMANDS:
 				getCommands().clear();
 				return;
@@ -690,6 +723,8 @@ public class ApplicationImpl extends ElementContainerImpl<MWindow> implements MA
 				return trimContributions != null && !trimContributions.isEmpty();
 			case ApplicationPackageImpl.APPLICATION__SNIPPETS:
 				return snippets != null && !snippets.isEmpty();
+			case ApplicationPackageImpl.APPLICATION__LIFECYLE_UR_IS:
+				return lifecyleURIs != null && !lifecyleURIs.isEmpty();
 			case ApplicationPackageImpl.APPLICATION__COMMANDS:
 				return commands != null && !commands.isEmpty();
 			case ApplicationPackageImpl.APPLICATION__ADDONS:
@@ -764,6 +799,12 @@ public class ApplicationImpl extends ElementContainerImpl<MWindow> implements MA
 				default: return -1;
 			}
 		}
+		if (baseClass == MLifecycledElement.class) {
+			switch (derivedFeatureID) {
+				case ApplicationPackageImpl.APPLICATION__LIFECYLE_UR_IS: return UiPackageImpl.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -831,6 +872,12 @@ public class ApplicationImpl extends ElementContainerImpl<MWindow> implements MA
 				default: return -1;
 			}
 		}
+		if (baseClass == MLifecycledElement.class) {
+			switch (baseFeatureID) {
+				case UiPackageImpl.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS: return ApplicationPackageImpl.APPLICATION__LIFECYLE_UR_IS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -848,6 +895,8 @@ public class ApplicationImpl extends ElementContainerImpl<MWindow> implements MA
 		result.append(context);
 		result.append(", variables: "); //$NON-NLS-1$
 		result.append(variables);
+		result.append(", lifecyleURIs: "); //$NON-NLS-1$
+		result.append(lifecyleURIs);
 		result.append(')');
 		return result.toString();
 	}

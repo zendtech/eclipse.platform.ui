@@ -24,6 +24,7 @@ import org.eclipse.e4.ui.model.application.commands.impl.CommandsPackageImpl;
 import org.eclipse.e4.ui.model.application.impl.ApplicationPackageImpl;
 import org.eclipse.e4.ui.model.application.impl.StringToStringMapImpl;
 import org.eclipse.e4.ui.model.application.ui.MContext;
+import org.eclipse.e4.ui.model.application.ui.MLifecycledElement;
 import org.eclipse.e4.ui.model.application.ui.MSnippetContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.MUILabel;
@@ -62,6 +63,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getHandlers <em>Handlers</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getBindingContexts <em>Binding Contexts</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getSnippets <em>Snippets</em>}</li>
+ *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getLifecyleURIs <em>Lifecyle UR Is</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getMainMenu <em>Main Menu</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getX <em>X</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getY <em>Y</em>}</li>
@@ -204,6 +206,16 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 	 * @ordered
 	 */
 	protected EList<MUIElement> snippets;
+
+	/**
+	 * The cached value of the '{@link #getLifecyleURIs() <em>Lifecyle UR Is</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLifecyleURIs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> lifecyleURIs;
 
 	/**
 	 * The cached value of the '{@link #getMainMenu() <em>Main Menu</em>}' containment reference.
@@ -483,6 +495,18 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<String> getLifecyleURIs() {
+		if (lifecyleURIs == null) {
+			lifecyleURIs = new EDataTypeUniqueEList<String>(String.class, this, BasicPackageImpl.WINDOW__LIFECYLE_UR_IS);
+		}
+		return lifecyleURIs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public MMenu getMainMenu() {
 		return mainMenu;
 	}
@@ -696,6 +720,8 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 				return getBindingContexts();
 			case BasicPackageImpl.WINDOW__SNIPPETS:
 				return getSnippets();
+			case BasicPackageImpl.WINDOW__LIFECYLE_UR_IS:
+				return getLifecyleURIs();
 			case BasicPackageImpl.WINDOW__MAIN_MENU:
 				return getMainMenu();
 			case BasicPackageImpl.WINDOW__X:
@@ -753,6 +779,10 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 			case BasicPackageImpl.WINDOW__SNIPPETS:
 				getSnippets().clear();
 				getSnippets().addAll((Collection<? extends MUIElement>)newValue);
+				return;
+			case BasicPackageImpl.WINDOW__LIFECYLE_UR_IS:
+				getLifecyleURIs().clear();
+				getLifecyleURIs().addAll((Collection<? extends String>)newValue);
 				return;
 			case BasicPackageImpl.WINDOW__MAIN_MENU:
 				setMainMenu((MMenu)newValue);
@@ -816,6 +846,9 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 			case BasicPackageImpl.WINDOW__SNIPPETS:
 				getSnippets().clear();
 				return;
+			case BasicPackageImpl.WINDOW__LIFECYLE_UR_IS:
+				getLifecyleURIs().clear();
+				return;
 			case BasicPackageImpl.WINDOW__MAIN_MENU:
 				setMainMenu((MMenu)null);
 				return;
@@ -867,6 +900,8 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 				return bindingContexts != null && !bindingContexts.isEmpty();
 			case BasicPackageImpl.WINDOW__SNIPPETS:
 				return snippets != null && !snippets.isEmpty();
+			case BasicPackageImpl.WINDOW__LIFECYLE_UR_IS:
+				return lifecyleURIs != null && !lifecyleURIs.isEmpty();
 			case BasicPackageImpl.WINDOW__MAIN_MENU:
 				return mainMenu != null;
 			case BasicPackageImpl.WINDOW__X:
@@ -926,6 +961,12 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 				default: return -1;
 			}
 		}
+		if (baseClass == MLifecycledElement.class) {
+			switch (derivedFeatureID) {
+				case BasicPackageImpl.WINDOW__LIFECYLE_UR_IS: return UiPackageImpl.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -970,6 +1011,12 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 				default: return -1;
 			}
 		}
+		if (baseClass == MLifecycledElement.class) {
+			switch (baseFeatureID) {
+				case UiPackageImpl.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS: return BasicPackageImpl.WINDOW__LIFECYLE_UR_IS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -1003,6 +1050,11 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 			}
 		}
 		if (baseClass == MSnippetContainer.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == MLifecycledElement.class) {
 			switch (baseOperationID) {
 				default: return -1;
 			}
@@ -1046,6 +1098,8 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 		result.append(context);
 		result.append(", variables: "); //$NON-NLS-1$
 		result.append(variables);
+		result.append(", lifecyleURIs: "); //$NON-NLS-1$
+		result.append(lifecyleURIs);
 		result.append(", x: "); //$NON-NLS-1$
 		result.append(x);
 		result.append(", y: "); //$NON-NLS-1$

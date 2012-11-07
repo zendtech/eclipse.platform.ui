@@ -13,6 +13,7 @@ package org.eclipse.e4.ui.model.application.ui.advanced;
 import java.util.List;
 import org.eclipse.e4.ui.model.application.ui.MContext;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
+import org.eclipse.e4.ui.model.application.ui.MLifecycledElement;
 import org.eclipse.e4.ui.model.application.ui.MUILabel;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartSashContainerElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
@@ -32,7 +33,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
  * @model
  * @generated
  */
-public interface MPerspective extends MElementContainer<MPartSashContainerElement>, MUILabel, MContext {
+public interface MPerspective extends MElementContainer<MPartSashContainerElement>, MUILabel, MContext, MLifecycledElement {
 	/**
 	 * Returns the value of the '<em><b>Windows</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.e4.ui.model.application.ui.basic.MWindow}.

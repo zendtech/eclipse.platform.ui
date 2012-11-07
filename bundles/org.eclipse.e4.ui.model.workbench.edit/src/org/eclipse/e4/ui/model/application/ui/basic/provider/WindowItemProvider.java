@@ -81,6 +81,7 @@ public class WindowItemProvider
 			addContextPropertyDescriptor(object);
 			addVariablesPropertyDescriptor(object);
 			addBindingContextsPropertyDescriptor(object);
+			addLifecyleURIsPropertyDescriptor(object);
 			addXPropertyDescriptor(object);
 			addYPropertyDescriptor(object);
 			addWidthPropertyDescriptor(object);
@@ -218,6 +219,28 @@ public class WindowItemProvider
 				 false,
 				 false,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Lifecyle UR Is feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLifecyleURIsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LifecycledElement_lifecyleURIs_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_LifecycledElement_lifecyleURIs_feature", "_UI_LifecycledElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				 UiPackageImpl.Literals.LIFECYCLED_ELEMENT__LIFECYLE_UR_IS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -410,6 +433,7 @@ public class WindowItemProvider
 			case BasicPackageImpl.WINDOW__CONTEXT:
 			case BasicPackageImpl.WINDOW__VARIABLES:
 			case BasicPackageImpl.WINDOW__BINDING_CONTEXTS:
+			case BasicPackageImpl.WINDOW__LIFECYLE_UR_IS:
 			case BasicPackageImpl.WINDOW__X:
 			case BasicPackageImpl.WINDOW__Y:
 			case BasicPackageImpl.WINDOW__WIDTH:

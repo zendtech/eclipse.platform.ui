@@ -15,8 +15,10 @@ import org.eclipse.e4.ui.model.application.ui.MContext;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MGenericStack;
 import org.eclipse.e4.ui.model.application.ui.MGenericTile;
+import org.eclipse.e4.ui.model.application.ui.MLifecycledElement;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.MUILabel;
+import org.eclipse.e4.ui.model.application.ui.advanced.*;
 import org.eclipse.e4.ui.model.application.ui.advanced.MArea;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspectiveStack;
@@ -130,6 +132,10 @@ public class AdvancedAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseContext(MContext object) {
 				return createContextAdapter();
+			}
+			@Override
+			public Adapter caseLifecycledElement(MLifecycledElement object) {
+				return createLifecycledElementAdapter();
 			}
 			@Override
 			public <T extends MUIElement> Adapter caseGenericStack(MGenericStack<T> object) {
@@ -318,6 +324,20 @@ public class AdvancedAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContextAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.e4.ui.model.application.ui.MLifecycledElement <em>Lifecycled Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.e4.ui.model.application.ui.MLifecycledElement
+	 * @generated
+	 */
+	public Adapter createLifecycledElementAdapter() {
 		return null;
 	}
 

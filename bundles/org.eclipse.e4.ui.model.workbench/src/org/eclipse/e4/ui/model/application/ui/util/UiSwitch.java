@@ -11,6 +11,7 @@
 package org.eclipse.e4.ui.model.application.ui.util;
 
 import org.eclipse.e4.ui.model.application.MApplicationElement;
+import org.eclipse.e4.ui.model.application.ui.*;
 import org.eclipse.e4.ui.model.application.ui.MContext;
 import org.eclipse.e4.ui.model.application.ui.MCoreExpression;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
@@ -169,6 +170,14 @@ public class UiSwitch<T1> extends Switch<T1> {
 			case UiPackageImpl.SNIPPET_CONTAINER: {
 				MSnippetContainer snippetContainer = (MSnippetContainer)theEObject;
 				T1 result = caseSnippetContainer(snippetContainer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UiPackageImpl.LIFECYCLED_ELEMENT: {
+				MLifecycledElement lifecycledElement = (MLifecycledElement)theEObject;
+				T1 result = caseLifecycledElement(lifecycledElement);
+				if (result == null) result = caseUIElement(lifecycledElement);
+				if (result == null) result = caseApplicationElement(lifecycledElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -353,6 +362,21 @@ public class UiSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseSnippetContainer(MSnippetContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Lifecycled Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Lifecycled Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseLifecycledElement(MLifecycledElement object) {
 		return null;
 	}
 
