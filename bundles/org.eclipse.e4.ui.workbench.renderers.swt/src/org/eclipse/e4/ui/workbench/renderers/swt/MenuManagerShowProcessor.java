@@ -13,7 +13,6 @@ package org.eclipse.e4.ui.workbench.renderers.swt;
 import java.util.HashMap;
 import javax.inject.Inject;
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.ui.di.LifecycleAboutToHide;
 import org.eclipse.e4.ui.di.LifecycleAboutToShow;
 import org.eclipse.e4.ui.internal.workbench.swt.AbstractPartRenderer;
 import org.eclipse.e4.ui.internal.workbench.swt.Policy;
@@ -103,10 +102,6 @@ public class MenuManagerShowProcessor implements IMenuListener2 {
 		}
 		MenuManager menuManager = (MenuManager) manager;
 		final MMenu menuModel = renderer.getMenuModel(menuManager);
-
-		LifecycleHelper.invokeLifecycleHandlers(modelService, menuModel,
-				LifecycleAboutToHide.class);
-
 		final Menu menu = menuManager.getMenu();
 		if (menuModel != null) {
 			showMenu(menu, menuModel, menuManager);

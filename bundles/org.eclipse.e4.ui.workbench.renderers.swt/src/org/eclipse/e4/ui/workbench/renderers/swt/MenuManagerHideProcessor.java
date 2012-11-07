@@ -12,9 +12,11 @@ package org.eclipse.e4.ui.workbench.renderers.swt;
 
 import javax.inject.Inject;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.di.LifecycleAboutToHide;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MPopupMenu;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.LifecycleHelper;
 import org.eclipse.e4.ui.workbench.swt.factories.IRendererFactory;
 import org.eclipse.jface.action.IMenuListener2;
 import org.eclipse.jface.action.IMenuManager;
@@ -51,6 +53,10 @@ public class MenuManagerHideProcessor implements IMenuListener2 {
 		}
 		MenuManager menuManager = (MenuManager) manager;
 		final MMenu menuModel = renderer.getMenuModel(menuManager);
+
+		LifecycleHelper.invokeLifecycleHandlers(modelService, menuModel,
+				LifecycleAboutToHide.class);
+
 		final Menu menu = menuManager.getMenu();
 		if (menuModel instanceof MPopupMenu) {
 			hidePopup(menu, (MPopupMenu) menuModel, menuManager);
