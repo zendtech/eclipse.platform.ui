@@ -22,6 +22,7 @@ import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.commands.State;
 import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.runtime.ISafeRunnable;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
@@ -280,6 +281,12 @@ public class HandledContributionItem extends ContributionItem {
 			ParameterizedCommand parmCmd = commandService.createCommand(cmdId,
 					parameters);
 			Activator.trace(Policy.DEBUG_MENUS, "command: " + parmCmd, null); //$NON-NLS-1$
+			if (parmCmd == null) {
+				Activator.log(IStatus.ERROR,
+						"Unable to generate parameterized command for " + model //$NON-NLS-1$
+								+ " with " + parameters); //$NON-NLS-1$
+				return;
+			}
 
 			model.setWbCommand(parmCmd);
 

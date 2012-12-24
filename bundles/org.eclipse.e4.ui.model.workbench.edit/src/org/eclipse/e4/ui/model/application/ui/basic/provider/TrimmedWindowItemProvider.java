@@ -173,7 +173,9 @@ public class TrimmedWindowItemProvider extends WindowItemProvider implements
 			childFeature == BasicPackageImpl.Literals.WINDOW__SHARED_ELEMENTS ||
 			childFeature == BasicPackageImpl.Literals.WINDOW__WINDOWS ||
 			childFeature == BasicPackageImpl.Literals.TRIMMED_WINDOW__TRIM_BARS ||
-			childFeature == BasicPackageImpl.Literals.WINDOW__MAIN_MENU;
+			childFeature == BasicPackageImpl.Literals.WINDOW__MAIN_MENU ||
+			childFeature == BasicPackageImpl.Literals.WINDOW__MENUS ||
+			childFeature == BasicPackageImpl.Literals.WINDOW__TOOLBARS;
 
 		if (qualify) {
 			return getString

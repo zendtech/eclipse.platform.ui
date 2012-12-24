@@ -161,7 +161,9 @@ public class InputPartItemProvider
 
 		boolean qualify =
 			childFeature == ApplicationPackageImpl.Literals.APPLICATION_ELEMENT__PERSISTED_STATE ||
-			childFeature == UiPackageImpl.Literals.CONTEXT__PROPERTIES;
+			childFeature == UiPackageImpl.Literals.CONTEXT__PROPERTIES ||
+			childFeature == BasicPackageImpl.Literals.PART__TOOLBAR ||
+			childFeature == BasicPackageImpl.Literals.PART__TOOLBARS;
 
 		if (qualify) {
 			return getString

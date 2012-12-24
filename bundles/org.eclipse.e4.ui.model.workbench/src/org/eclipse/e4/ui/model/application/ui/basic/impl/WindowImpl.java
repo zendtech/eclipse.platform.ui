@@ -32,6 +32,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MWindowElement;
 import org.eclipse.e4.ui.model.application.ui.impl.ElementContainerImpl;
 import org.eclipse.e4.ui.model.application.ui.impl.UiPackageImpl;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
+import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -69,6 +70,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getHeight <em>Height</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getWindows <em>Windows</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getSharedElements <em>Shared Elements</em>}</li>
+ *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getMenus <em>Menus</em>}</li>
+ *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.impl.WindowImpl#getToolbars <em>Toolbars</em>}</li>
  * </ul>
  * </p>
  *
@@ -314,6 +317,26 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 	 * @ordered
 	 */
 	protected EList<MUIElement> sharedElements;
+
+	/**
+	 * The cached value of the '{@link #getMenus() <em>Menus</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMenus()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MMenu> menus;
+
+	/**
+	 * The cached value of the '{@link #getToolbars() <em>Toolbars</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getToolbars()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MToolBar> toolbars;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -632,6 +655,30 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<MMenu> getMenus() {
+		if (menus == null) {
+			menus = new EObjectContainmentEList<MMenu>(MMenu.class, this, BasicPackageImpl.WINDOW__MENUS);
+		}
+		return menus;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<MToolBar> getToolbars() {
+		if (toolbars == null) {
+			toolbars = new EObjectContainmentEList<MToolBar>(MToolBar.class, this, BasicPackageImpl.WINDOW__TOOLBARS);
+		}
+		return toolbars;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	public String getLocalizedLabel() {
 		return LocalizationHelper.getLocalizedLabel(this);		
@@ -665,6 +712,10 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 				return ((InternalEList<?>)getWindows()).basicRemove(otherEnd, msgs);
 			case BasicPackageImpl.WINDOW__SHARED_ELEMENTS:
 				return ((InternalEList<?>)getSharedElements()).basicRemove(otherEnd, msgs);
+			case BasicPackageImpl.WINDOW__MENUS:
+				return ((InternalEList<?>)getMenus()).basicRemove(otherEnd, msgs);
+			case BasicPackageImpl.WINDOW__TOOLBARS:
+				return ((InternalEList<?>)getToolbars()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -710,6 +761,10 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 				return getWindows();
 			case BasicPackageImpl.WINDOW__SHARED_ELEMENTS:
 				return getSharedElements();
+			case BasicPackageImpl.WINDOW__MENUS:
+				return getMenus();
+			case BasicPackageImpl.WINDOW__TOOLBARS:
+				return getToolbars();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -777,6 +832,14 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 				getSharedElements().clear();
 				getSharedElements().addAll((Collection<? extends MUIElement>)newValue);
 				return;
+			case BasicPackageImpl.WINDOW__MENUS:
+				getMenus().clear();
+				getMenus().addAll((Collection<? extends MMenu>)newValue);
+				return;
+			case BasicPackageImpl.WINDOW__TOOLBARS:
+				getToolbars().clear();
+				getToolbars().addAll((Collection<? extends MToolBar>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -837,6 +900,12 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 			case BasicPackageImpl.WINDOW__SHARED_ELEMENTS:
 				getSharedElements().clear();
 				return;
+			case BasicPackageImpl.WINDOW__MENUS:
+				getMenus().clear();
+				return;
+			case BasicPackageImpl.WINDOW__TOOLBARS:
+				getToolbars().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -881,6 +950,10 @@ public class WindowImpl extends ElementContainerImpl<MWindowElement> implements 
 				return windows != null && !windows.isEmpty();
 			case BasicPackageImpl.WINDOW__SHARED_ELEMENTS:
 				return sharedElements != null && !sharedElements.isEmpty();
+			case BasicPackageImpl.WINDOW__MENUS:
+				return menus != null && !menus.isEmpty();
+			case BasicPackageImpl.WINDOW__TOOLBARS:
+				return toolbars != null && !toolbars.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

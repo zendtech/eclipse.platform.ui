@@ -33,6 +33,7 @@ import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.MPart#getToolbar <em>Toolbar</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.MPart#isCloseable <em>Closeable</em>}</li>
  *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.MPart#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.eclipse.e4.ui.model.application.ui.basic.MPart#getToolbars <em>Toolbars</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,6 +80,21 @@ public interface MPart extends MUIElement, MPartSashContainerElement, MStackElem
 	 * @generated
 	 */
 	void setToolbar(MToolBar value);
+
+	/**
+	 * Returns the value of the '<em><b>Toolbars</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.e4.ui.model.application.ui.menu.MToolBar}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Toolbars</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Toolbars</em>' containment reference list.
+	 * @model containment="true"
+	 * @generated
+	 */
+	List<MToolBar> getToolbars();
 
 	/**
 	 * Returns the value of the '<em><b>Closeable</b></em>' attribute.

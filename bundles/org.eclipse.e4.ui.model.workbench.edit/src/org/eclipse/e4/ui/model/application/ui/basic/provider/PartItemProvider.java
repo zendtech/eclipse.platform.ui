@@ -348,6 +348,7 @@ public class PartItemProvider
 			childrenFeatures.add(CommandsPackageImpl.Literals.HANDLER_CONTAINER__HANDLERS);
 			childrenFeatures.add(BasicPackageImpl.Literals.PART__MENUS);
 			childrenFeatures.add(BasicPackageImpl.Literals.PART__TOOLBAR);
+			childrenFeatures.add(BasicPackageImpl.Literals.PART__TOOLBARS);
 		}
 		return childrenFeatures;
 	}
@@ -419,6 +420,7 @@ public class PartItemProvider
 			case BasicPackageImpl.PART__HANDLERS:
 			case BasicPackageImpl.PART__MENUS:
 			case BasicPackageImpl.PART__TOOLBAR:
+			case BasicPackageImpl.PART__TOOLBARS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -475,6 +477,16 @@ public class PartItemProvider
 			(createChildParameter
 				(BasicPackageImpl.Literals.PART__TOOLBAR,
 				 MMenuFactory.INSTANCE.createRenderedToolBar()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BasicPackageImpl.Literals.PART__TOOLBARS,
+				 MMenuFactory.INSTANCE.createToolBar()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BasicPackageImpl.Literals.PART__TOOLBARS,
+				 MMenuFactory.INSTANCE.createRenderedToolBar()));
 	}
 
 	/**
@@ -490,7 +502,9 @@ public class PartItemProvider
 
 		boolean qualify =
 			childFeature == ApplicationPackageImpl.Literals.APPLICATION_ELEMENT__PERSISTED_STATE ||
-			childFeature == UiPackageImpl.Literals.CONTEXT__PROPERTIES;
+			childFeature == UiPackageImpl.Literals.CONTEXT__PROPERTIES ||
+			childFeature == BasicPackageImpl.Literals.PART__TOOLBAR ||
+			childFeature == BasicPackageImpl.Literals.PART__TOOLBARS;
 
 		if (qualify) {
 			return getString

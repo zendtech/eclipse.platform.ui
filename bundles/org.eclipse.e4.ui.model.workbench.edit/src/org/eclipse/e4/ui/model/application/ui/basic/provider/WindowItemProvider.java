@@ -350,6 +350,8 @@ public class WindowItemProvider
 			childrenFeatures.add(BasicPackageImpl.Literals.WINDOW__MAIN_MENU);
 			childrenFeatures.add(BasicPackageImpl.Literals.WINDOW__WINDOWS);
 			childrenFeatures.add(BasicPackageImpl.Literals.WINDOW__SHARED_ELEMENTS);
+			childrenFeatures.add(BasicPackageImpl.Literals.WINDOW__MENUS);
+			childrenFeatures.add(BasicPackageImpl.Literals.WINDOW__TOOLBARS);
 		}
 		return childrenFeatures;
 	}
@@ -422,6 +424,8 @@ public class WindowItemProvider
 			case BasicPackageImpl.WINDOW__MAIN_MENU:
 			case BasicPackageImpl.WINDOW__WINDOWS:
 			case BasicPackageImpl.WINDOW__SHARED_ELEMENTS:
+			case BasicPackageImpl.WINDOW__MENUS:
+			case BasicPackageImpl.WINDOW__TOOLBARS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -798,6 +802,36 @@ public class WindowItemProvider
 			(createChildParameter
 				(BasicPackageImpl.Literals.WINDOW__SHARED_ELEMENTS,
 				 MAdvancedFactory.INSTANCE.createArea()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BasicPackageImpl.Literals.WINDOW__MENUS,
+				 MMenuFactory.INSTANCE.createMenu()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BasicPackageImpl.Literals.WINDOW__MENUS,
+				 MMenuFactory.INSTANCE.createPopupMenu()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BasicPackageImpl.Literals.WINDOW__MENUS,
+				 MMenuFactory.INSTANCE.createRenderedMenu()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BasicPackageImpl.Literals.WINDOW__MENUS,
+				 MMenuFactory.INSTANCE.createOpaqueMenu()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BasicPackageImpl.Literals.WINDOW__TOOLBARS,
+				 MMenuFactory.INSTANCE.createToolBar()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BasicPackageImpl.Literals.WINDOW__TOOLBARS,
+				 MMenuFactory.INSTANCE.createRenderedToolBar()));
 	}
 
 	/**
@@ -818,7 +852,9 @@ public class WindowItemProvider
 			childFeature == UiPackageImpl.Literals.SNIPPET_CONTAINER__SNIPPETS ||
 			childFeature == BasicPackageImpl.Literals.WINDOW__SHARED_ELEMENTS ||
 			childFeature == BasicPackageImpl.Literals.WINDOW__WINDOWS ||
-			childFeature == BasicPackageImpl.Literals.WINDOW__MAIN_MENU;
+			childFeature == BasicPackageImpl.Literals.WINDOW__MAIN_MENU ||
+			childFeature == BasicPackageImpl.Literals.WINDOW__MENUS ||
+			childFeature == BasicPackageImpl.Literals.WINDOW__TOOLBARS;
 
 		if (qualify) {
 			return getString

@@ -465,13 +465,22 @@ public class BasicPackageImpl extends EPackageImpl {
 	public static final int PART__DESCRIPTION = UiPackageImpl.UI_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
+	 * The feature id for the '<em><b>Toolbars</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PART__TOOLBARS = UiPackageImpl.UI_ELEMENT_FEATURE_COUNT + 15;
+
+	/**
 	 * The number of structural features of the '<em>Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PART_FEATURE_COUNT = UiPackageImpl.UI_ELEMENT_FEATURE_COUNT + 15;
+	public static final int PART_FEATURE_COUNT = UiPackageImpl.UI_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The operation id for the '<em>Get Localized Accessibility Phrase</em>' operation.
@@ -787,6 +796,15 @@ public class BasicPackageImpl extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int INPUT_PART__DESCRIPTION = PART__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Toolbars</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INPUT_PART__TOOLBARS = PART__TOOLBARS;
 
 	/**
 	 * The feature id for the '<em><b>Input URI</b></em>' attribute.
@@ -1518,13 +1536,31 @@ public class BasicPackageImpl extends EPackageImpl {
 	public static final int WINDOW__SHARED_ELEMENTS = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 15;
 
 	/**
+	 * The feature id for the '<em><b>Menus</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int WINDOW__MENUS = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 16;
+
+	/**
+	 * The feature id for the '<em><b>Toolbars</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int WINDOW__TOOLBARS = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 17;
+
+	/**
 	 * The number of structural features of the '<em>Window</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int WINDOW_FEATURE_COUNT = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 16;
+	public static final int WINDOW_FEATURE_COUNT = UiPackageImpl.ELEMENT_CONTAINER_FEATURE_COUNT + 18;
 
 	/**
 	 * The operation id for the '<em>Get Localized Accessibility Phrase</em>' operation.
@@ -1858,6 +1894,24 @@ public class BasicPackageImpl extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int TRIMMED_WINDOW__SHARED_ELEMENTS = WINDOW__SHARED_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Menus</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRIMMED_WINDOW__MENUS = WINDOW__MENUS;
+
+	/**
+	 * The feature id for the '<em><b>Toolbars</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRIMMED_WINDOW__TOOLBARS = WINDOW__TOOLBARS;
 
 	/**
 	 * The feature id for the '<em><b>Trim Bars</b></em>' containment reference list.
@@ -2947,6 +3001,21 @@ public class BasicPackageImpl extends EPackageImpl {
 		return (EReference)partEClass.getEStructuralFeatures().get(1);
 	}
 
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.e4.ui.model.application.ui.basic.MPart#getToolbars <em>Toolbars</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Toolbars</em>'.
+	 * @see org.eclipse.e4.ui.model.application.ui.basic.MPart#getToolbars()
+	 * @see #getPart()
+	 * @generated
+	 */
+	public EReference getPart_Toolbars() {
+		return (EReference)partEClass.getEStructuralFeatures().get(4);
+	}
+
+
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.e4.ui.model.application.ui.basic.MPart#isCloseable <em>Closeable</em>}'.
 	 * <!-- begin-user-doc -->
@@ -3128,6 +3197,34 @@ public class BasicPackageImpl extends EPackageImpl {
 
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.e4.ui.model.application.ui.basic.MWindow#getMenus <em>Menus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Menus</em>'.
+	 * @see org.eclipse.e4.ui.model.application.ui.basic.MWindow#getMenus()
+	 * @see #getWindow()
+	 * @generated
+	 */
+	public EReference getWindow_Menus() {
+		return (EReference)windowEClass.getEStructuralFeatures().get(7);
+	}
+
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.e4.ui.model.application.ui.basic.MWindow#getToolbars <em>Toolbars</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Toolbars</em>'.
+	 * @see org.eclipse.e4.ui.model.application.ui.basic.MWindow#getToolbars()
+	 * @see #getWindow()
+	 * @generated
+	 */
+	public EReference getWindow_Toolbars() {
+		return (EReference)windowEClass.getEStructuralFeatures().get(8);
+	}
+
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.e4.ui.model.application.ui.basic.MTrimmedWindow <em>Trimmed Window</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3248,6 +3345,7 @@ public class BasicPackageImpl extends EPackageImpl {
 		createEReference(partEClass, PART__TOOLBAR);
 		createEAttribute(partEClass, PART__CLOSEABLE);
 		createEAttribute(partEClass, PART__DESCRIPTION);
+		createEReference(partEClass, PART__TOOLBARS);
 		createEOperation(partEClass, PART___GET_LOCALIZED_DESCRIPTION);
 
 		inputPartEClass = createEClass(INPUT_PART);
@@ -3264,6 +3362,8 @@ public class BasicPackageImpl extends EPackageImpl {
 		createEAttribute(windowEClass, WINDOW__HEIGHT);
 		createEReference(windowEClass, WINDOW__WINDOWS);
 		createEReference(windowEClass, WINDOW__SHARED_ELEMENTS);
+		createEReference(windowEClass, WINDOW__MENUS);
+		createEReference(windowEClass, WINDOW__TOOLBARS);
 
 		trimmedWindowEClass = createEClass(TRIMMED_WINDOW);
 		createEReference(trimmedWindowEClass, TRIMMED_WINDOW__TRIM_BARS);
@@ -3373,6 +3473,7 @@ public class BasicPackageImpl extends EPackageImpl {
 		initEReference(getPart_Toolbar(), theMenuPackage.getToolBar(), null, "toolbar", null, 0, 1, MPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getPart_Closeable(), ecorePackage.getEBoolean(), "closeable", "false", 0, 1, MPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 		initEAttribute(getPart_Description(), ecorePackage.getEString(), "description", null, 0, 1, MPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getPart_Toolbars(), theMenuPackage.getToolBar(), null, "toolbars", null, 0, -1, MPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEOperation(getPart__GetLocalizedDescription(), ecorePackage.getEString(), "getLocalizedDescription", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
@@ -3390,6 +3491,8 @@ public class BasicPackageImpl extends EPackageImpl {
 		initEAttribute(getWindow_Height(), ecorePackage.getEInt(), "height", "-1", 0, 1, MWindow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 		initEReference(getWindow_Windows(), this.getWindow(), null, "windows", null, 0, -1, MWindow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getWindow_SharedElements(), theUiPackage.getUIElement(), null, "sharedElements", null, 0, -1, MWindow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getWindow_Menus(), theMenuPackage.getMenu(), null, "menus", null, 0, -1, MWindow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getWindow_Toolbars(), theMenuPackage.getToolBar(), null, "toolbars", null, 0, -1, MWindow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(trimmedWindowEClass, MTrimmedWindow.class, "TrimmedWindow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getTrimmedWindow_TrimBars(), this.getTrimBar(), null, "trimBars", null, 0, -1, MTrimmedWindow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -3443,6 +3546,14 @@ public class BasicPackageImpl extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EReference PART__TOOLBAR = eINSTANCE.getPart_Toolbar();
+
+		/**
+		 * The meta object literal for the '<em><b>Toolbars</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference PART__TOOLBARS = eINSTANCE.getPart_Toolbars();
 
 		/**
 		 * The meta object literal for the '<em><b>Closeable</b></em>' attribute feature.
@@ -3563,6 +3674,22 @@ public class BasicPackageImpl extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EReference WINDOW__SHARED_ELEMENTS = eINSTANCE.getWindow_SharedElements();
+
+		/**
+		 * The meta object literal for the '<em><b>Menus</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference WINDOW__MENUS = eINSTANCE.getWindow_Menus();
+
+		/**
+		 * The meta object literal for the '<em><b>Toolbars</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference WINDOW__TOOLBARS = eINSTANCE.getWindow_Toolbars();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.e4.ui.model.application.ui.basic.impl.TrimmedWindowImpl <em>Trimmed Window</em>}' class.
