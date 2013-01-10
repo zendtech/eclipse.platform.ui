@@ -303,6 +303,19 @@ public abstract class CompatibilityPart implements ISelectionChangedListener {
 			if (!handlePartInitException(e)) {
 				return;
 			}
+		} catch (Exception e) {
+			/*
+			 * Bugs 374588, 387475: Historically, although never documented,
+			 * exceptions thrown in #init() would be surfaced to the caller of
+			 * showView() or openEditor(). Such exceptions would be swallowed by
+			 * the injector and cause this part's creation to fail -- with
+			 * negative consequences. So we instead treat these unexpected
+			 * exceptions as PartInitExceptions.
+			 */
+			if (!handlePartInitException(new PartInitException(
+					"An exception occurred during part initialization", e))) { //$NON-NLS-1$
+				return;
+			}
 		}
 
 		// hook reference listeners to the part
