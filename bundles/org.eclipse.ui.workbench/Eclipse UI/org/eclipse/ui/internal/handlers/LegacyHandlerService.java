@@ -23,7 +23,6 @@ import javax.inject.Named;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.commands.HandlerEvent;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.NotEnabledException;
 import org.eclipse.core.commands.NotHandledException;
@@ -40,6 +39,7 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.core.commands.ExpressionContext;
 import org.eclipse.e4.core.commands.internal.HandlerServiceImpl;
 import org.eclipse.e4.core.contexts.ContextFunction;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
@@ -49,15 +49,12 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.internal.workbench.Activator;
 import org.eclipse.e4.ui.internal.workbench.Policy;
-import org.eclipse.e4.ui.workbench.modeling.ExpressionContext;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.ui.ISourceProvider;
 import org.eclipse.ui.ISources;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.IHandlerActivation;
 import org.eclipse.ui.handlers.IHandlerService;
-import org.eclipse.ui.internal.MakeHandlersGo;
 import org.eclipse.ui.internal.WorkbenchPlugin;
 import org.eclipse.ui.internal.e4.compatibility.E4Util;
 import org.eclipse.ui.internal.expressions.AndExpression;
@@ -148,93 +145,31 @@ public class LegacyHandlerService implements IHandlerService {
 
 	private static IHandlerActivation systemHandlerActivation;
 
-	/*
-	 * We are obligated to return a non-null IHandlerActivation from our
-	 * activate calls. It is only used as a token, but must not return null from
-	 * certain methods. This token represents passing the MakeHandlerGo handler
-	 * back into the system.
-	 */
-	private static IHandlerActivation getSystemHandlerActivation(IEclipseContext context, final String cmdId) {
-		if (systemHandlerActivation == null) {
-			final IWorkbench wb = context.get(IWorkbench.class);
 
-			systemHandlerActivation = new IHandlerActivation() {
-
-				public int compareTo(Object o) {
-					return -1;
-				}
-
-				public void setResult(boolean result) {
-				}
-
-				public int getSourcePriority() {
-					return 0;
-				}
-
-				public Expression getExpression() {
-					return null;
-				}
-
-				public boolean evaluate(IEvaluationContext context) {
-					return false;
-				}
-
-				public void clearResult() {
-				}
-
-				public boolean isActive(IEvaluationContext context) {
-					return false;
-				}
-
-				public IHandlerService getHandlerService() {
-					return (IHandlerService) wb.getService(IHandlerService.class);
-				}
-
-				public IHandler getHandler() {
-					return null;
-				}
-
-				public int getDepth() {
-					return 0;
-				}
-
-				public String getCommandId() {
-					return cmdId;
-				}
-
-				public void clearActive() {
-				}
-			};
-		}
-		return systemHandlerActivation;
-	}
 
 	public static IHandlerActivation registerLegacyHandler(final IEclipseContext context,
 			String id, final String cmdId, IHandler handler, Expression activeWhen) {
-		if (handler instanceof MakeHandlersGo) {
-			final String msg = "Invalid Handler MakeHandlerGo"; //$NON-NLS-1$
-			WorkbenchPlugin.log(msg, new Exception(msg));
-			return getSystemHandlerActivation(context, cmdId);
-		}
+
 		ECommandService cs = (ECommandService) context.get(ECommandService.class.getName());
 		Command command = cs.getCommand(cmdId);
-		boolean handled = command.isHandled();
-		boolean enabled = command.isEnabled();
+		// boolean handled = command.isHandled();
+		// boolean enabled = command.isEnabled();
 		E4HandlerProxy handlerProxy = new E4HandlerProxy(command, handler);
 		HandlerActivation activation = new HandlerActivation(context, cmdId, handler, handlerProxy,
 				activeWhen);
 		addHandlerActivation(activation);
 		EHandlerService hs = context.get(EHandlerService.class);
 		hs.activateHandler(cmdId, new HandlerSelectionFunction(cmdId));
-		boolean handledChanged = handled != command.isHandled();
-		boolean enabledChanged = enabled != command.isEnabled();
-		if (handledChanged || enabledChanged) {
-			IHandler proxy = command.getHandler();
-			if (proxy instanceof MakeHandlersGo) {
-				((MakeHandlersGo) proxy).fireHandlerChanged(new HandlerEvent(proxy, enabledChanged,
-						handledChanged));
-			}
-		}
+		// boolean handledChanged = handled != command.isHandled();
+		// boolean enabledChanged = enabled != command.isEnabled();
+		// if (handledChanged || enabledChanged) {
+		// IHandler proxy = command.getHandler();
+		// if (proxy instanceof MakeHandlersGo) {
+		// ((MakeHandlersGo) proxy).fireHandlerChanged(new HandlerEvent(proxy,
+		// enabledChanged,
+		// handledChanged));
+		// }
+		// }
 		return activation;
 	}
 
