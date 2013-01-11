@@ -51,7 +51,7 @@ public class CommandToModelProcessor {
 		CommandManager commandManager = context.get(CommandManager.class);
 		if (commandManager == null) {
 			commandManager = new CommandManager();
-			setCommandFireEvents(commandManager, false);
+			// setCommandFireEvents(commandManager, false);
 			context.set(CommandManager.class, commandManager);
 		}
 
@@ -128,7 +128,7 @@ public class CommandToModelProcessor {
 		}
 	}
 
-	private void setCommandFireEvents(CommandManager manager, boolean b) {
+	void setCommandFireEvents(CommandManager manager, boolean b) {
 		try {
 			Field f = CommandManager.class.getDeclaredField("shouldCommandFireEvents"); //$NON-NLS-1$
 			f.setAccessible(true);

@@ -11,6 +11,8 @@
  ******************************************************************************/
 package org.eclipse.e4.ui.internal.workbench;
 
+import org.eclipse.e4.core.commands.ExpressionContext;
+
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.e4.core.commands.EHandlerService;
@@ -28,7 +30,6 @@ import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.e4.ui.workbench.IWorkbench;
-import org.eclipse.e4.ui.workbench.modeling.ExpressionContext;
 import org.eclipse.emf.common.notify.Notifier;
 
 public class E4Workbench implements IWorkbench {

@@ -12,10 +12,16 @@
 package org.eclipse.e4.core.commands.internal;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import javax.inject.Inject;
 import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.commands.NotEnabledException;
+import org.eclipse.core.commands.NotHandledException;
 import org.eclipse.core.commands.ParameterizedCommand;
+import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
@@ -29,11 +35,34 @@ import org.eclipse.e4.core.services.log.Logger;
  *
  */
 public class HandlerServiceImpl implements EHandlerService {
-	private static final String TMP_STATIC_CONTEXT = "tmp-staticContext"; //$NON-NLS-1$
+	static final String TMP_STATIC_CONTEXT = "tmp-staticContext"; //$NON-NLS-1$
 	public final static String H_ID = "handler::"; //$NON-NLS-1$
 	public final static String PARM_MAP = "parmMap::"; //$NON-NLS-1$
 	public final static String CAN_EXECUTE = "HandlerServiceImpl.canExecute"; //$NON-NLS-1$
 	public final static String NOT_HANDLED = "HandlerServiceImpl.notHandled"; //$NON-NLS-1$
+	public final static String STATIC_CONTEXT = "HandlerServiceImpl.staticContext"; //$NON-NLS-1$
+
+	private static LinkedList<IEclipseContext> contextStack = new LinkedList<IEclipseContext>();
+
+	public static IHandler getHandler(String commandId) {
+		return new HandlerServiceHandler(commandId);
+	}
+
+	static LinkedList<IEclipseContext> getContextStack() {
+		return contextStack;
+	}
+
+	public static void push(IEclipseContext ctx) {
+		getContextStack().addFirst(ctx);
+	}
+
+	static IEclipseContext pop() {
+		return getContextStack().poll();
+	}
+
+	static IEclipseContext peek() {
+		return getContextStack().peek();
+	}
 
 	/**
 	 * @param context
@@ -45,11 +74,28 @@ public class HandlerServiceImpl implements EHandlerService {
 		return context.getActiveLeaf().get(H_ID + commandId);
 	}
 
+	/**
+	 * Fill in a temporary static context for execution.
+	 * 
+	 * @param command
+	 * @return a context not part of the normal hierarchy
+	 */
+	public static void addParms(ParameterizedCommand command, IEclipseContext staticContext) {
+		final Map parms = command.getParameterMap();
+		Iterator i = parms.entrySet().iterator();
+		while (i.hasNext()) {
+			Map.Entry entry = (Map.Entry) i.next();
+			staticContext.set((String) entry.getKey(), entry.getValue());
+		}
+		staticContext.set(PARM_MAP, parms);
+		staticContext.set(ParameterizedCommand.class, command);
+	}
+
 	private IEclipseContext context;
 
 	@Inject
 	@Optional
-	private Logger logger;
+	Logger logger;
 
 	public static Object preExecute = null;
 
@@ -64,29 +110,6 @@ public class HandlerServiceImpl implements EHandlerService {
 		context.set(handlerId, handler);
 	}
 
-	/**
-	 * Fill in a temporary static context for execution.
-	 * 
-	 * @param command
-	 * @return a context not part of the normal hierarchy
-	 */
-	private void addParms(ParameterizedCommand command, IEclipseContext staticContext) {
-		final Map parms = command.getParameterMap();
-		Iterator i = parms.entrySet().iterator();
-		while (i.hasNext()) {
-			Map.Entry entry = (Map.Entry) i.next();
-			staticContext.set((String) entry.getKey(), entry.getValue());
-		}
-		staticContext.set(PARM_MAP, parms);
-		staticContext.set(ParameterizedCommand.class, command);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.e4.core.commands.EHandlerService#canExecute(org.eclipse.core.commands.
-	 * ParameterizedCommand)
-	 */
 	public boolean canExecute(ParameterizedCommand command) {
 		final IEclipseContext staticContext = EclipseContextFactory.create(TMP_STATIC_CONTEXT);
 		try {
@@ -97,6 +120,21 @@ public class HandlerServiceImpl implements EHandlerService {
 	}
 
 	public boolean canExecute(ParameterizedCommand command, IEclipseContext staticContext) {
+		final IEclipseContext executionContext = getExecutionContext();
+		addParms(command, staticContext);
+		executionContext.set(STATIC_CONTEXT, staticContext);
+		push(executionContext);
+		try {
+			Command cmd = command.getCommand();
+			cmd.setEnabled(executionContext);
+			return cmd.isEnabled();
+		} finally {
+			pop();
+			executionContext.remove(STATIC_CONTEXT);
+		}
+	}
+
+	public boolean old_canExecute(ParameterizedCommand command, IEclipseContext staticContext) {
 		String commandId = command.getId();
 		Object handler = lookUpHandler(context, commandId);
 		if (handler == null) {
@@ -149,6 +187,33 @@ public class HandlerServiceImpl implements EHandlerService {
 	}
 
 	public Object executeHandler(ParameterizedCommand command, IEclipseContext staticContext) {
+		final IEclipseContext executionContext = getExecutionContext();
+		addParms(command, staticContext);
+		executionContext.set(STATIC_CONTEXT, staticContext);
+		push(executionContext);
+		try {
+			// Command cmd = command.getCommand();
+			return command.executeWithChecks(null, executionContext);
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotDefinedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotEnabledException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotHandledException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			pop();
+			executionContext.remove(STATIC_CONTEXT);
+		}
+		return null;
+	}
+
+	public Object old_executeHandler(ParameterizedCommand command, IEclipseContext staticContext) {
 		String commandId = command.getId();
 		final IEclipseContext executionContext = getExecutionContext();
 		addParms(command, staticContext);

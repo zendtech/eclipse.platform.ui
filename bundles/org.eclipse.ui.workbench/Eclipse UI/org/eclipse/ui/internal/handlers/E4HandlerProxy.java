@@ -11,6 +11,7 @@
 
 package org.eclipse.ui.internal.handlers;
 
+import java.util.Collections;
 import java.util.Map;
 import javax.inject.Named;
 import org.eclipse.core.commands.Command;
@@ -22,6 +23,7 @@ import org.eclipse.core.commands.IHandler2;
 import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.core.commands.NotHandledException;
 import org.eclipse.core.expressions.IEvaluationContext;
+import org.eclipse.e4.core.commands.ExpressionContext;
 import org.eclipse.e4.core.commands.internal.HandlerServiceImpl;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.CanExecute;
@@ -29,7 +31,6 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.internal.workbench.Activator;
 import org.eclipse.e4.ui.internal.workbench.Policy;
-import org.eclipse.e4.ui.workbench.modeling.ExpressionContext;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.MakeHandlersGo;
@@ -70,7 +71,8 @@ public class E4HandlerProxy implements IHandlerListener {
 		if (appContext == null) {
 			appContext = new ExpressionContext(context);
 		}
-		ExecutionEvent event = new ExecutionEvent(command, parms, trigger, appContext);
+		ExecutionEvent event = new ExecutionEvent(command, parms == null ? Collections.EMPTY_MAP
+				: parms, trigger, appContext);
 		if (handler != null && handler.isHandled()) {
 			try {
 				final Object returnValue = handler.execute(event);
