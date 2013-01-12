@@ -879,4 +879,11 @@ public class HandledContributionItem extends ContributionItem {
 	public Widget getWidget() {
 		return widget;
 	}
+
+	/**
+	 * @return the model
+	 */
+	public MHandledItem getModel() {
+		return model;
+	}
 }
