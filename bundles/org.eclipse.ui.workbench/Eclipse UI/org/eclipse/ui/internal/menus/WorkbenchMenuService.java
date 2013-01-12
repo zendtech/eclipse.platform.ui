@@ -41,7 +41,6 @@ import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.ui.ISourceProvider;
-import org.eclipse.ui.internal.WorkbenchPlugin;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -281,7 +280,7 @@ public class WorkbenchMenuService implements IMenuService {
 				MenuManagerRenderer renderer = (MenuManagerRenderer) obj;
 				mMenu.setRenderer(renderer);
 				renderer.reconcileManagerToModel(menu, mMenu);
-				renderer.processContributions(mMenu, false, false);
+				renderer.processContributions(mMenu, false, "popup".equals(uri.getScheme())); //$NON-NLS-1$
 				// double cast because we're bad people
 				renderer.processContents((MElementContainer<MUIElement>) ((Object) mMenu));
 			}
@@ -327,7 +326,9 @@ public class WorkbenchMenuService implements IMenuService {
 		if (mToolBar == null) {
 			mToolBar = MenuFactoryImpl.eINSTANCE.createToolBar();
 			mToolBar.setElementId(location.getPath());
-			mToolBar.getTags().add("toolbar:" + location.getPath()); //$NON-NLS-1$
+			mToolBar.getTags().add(ContributionsAnalyzer.MC_TOOLBAR);
+			String tag = "toolbar:" + location.getPath(); //$NON-NLS-1$
+			mToolBar.getTags().add(tag);
 			final MPart part = getPartToExtend();
 			if (part != null) {
 				part.getToolbars().add(mToolBar);
@@ -341,7 +342,7 @@ public class WorkbenchMenuService implements IMenuService {
 
 		renderer.linkModelToManager(mToolBar, toolbarManager);
 
-		return null;
+		return mToolBar;
 	}
 
 	protected MMenu getMenuModel(MenuManager menuManager, MenuLocationURI location) {
@@ -355,7 +356,12 @@ public class WorkbenchMenuService implements IMenuService {
 		MenuManagerRenderer renderer = (MenuManagerRenderer) obj;
 		MMenu mMenu = renderer.getMenuModel(menuManager);
 		if (mMenu != null) {
-			String tag = "menu:" + location.getPath(); //$NON-NLS-1$
+			final String tag;
+			if ("popup".equals(location.getScheme())) { //$NON-NLS-1$
+				tag = "popup:" + location.getPath(); //$NON-NLS-1$
+			} else {
+				tag = "menu:" + location.getPath(); //$NON-NLS-1$
+			}
 			if (!mMenu.getTags().contains(tag)) {
 				mMenu.getTags().add(tag);
 			}
@@ -368,8 +374,14 @@ public class WorkbenchMenuService implements IMenuService {
 			if (mMenu.getElementId() == null) {
 				mMenu.setElementId(location.getPath());
 			}
-			mMenu.getTags().add(ContributionsAnalyzer.MC_MENU);
-			String tag = "menu:" + location.getPath(); //$NON-NLS-1$
+			final String tag;
+			if ("popup".equals(location.getScheme())) { //$NON-NLS-1$
+				mMenu.getTags().add(ContributionsAnalyzer.MC_POPUP);
+				tag = "popup:" + location.getPath(); //$NON-NLS-1$
+			} else {
+				mMenu.getTags().add(ContributionsAnalyzer.MC_MENU);
+				tag = "menu:" + location.getPath(); //$NON-NLS-1$
+			}
 			mMenu.getTags().add(tag);
 			mMenu.setLabel(menuManager.getMenuText());
 			final MPart part = getPartToExtend();
