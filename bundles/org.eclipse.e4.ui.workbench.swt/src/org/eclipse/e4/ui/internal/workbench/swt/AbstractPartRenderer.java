@@ -16,6 +16,7 @@ import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.MUILabel;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.internal.ModelUtils;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
@@ -86,6 +87,10 @@ public abstract class AbstractPartRenderer {
 	protected IEclipseContext getContext(MUIElement part) {
 		if (part instanceof MContext) {
 			return ((MContext) part).getContext();
+		}
+		if (part.getTransientData().containsKey(ModelUtils.CONTAINING_CONTEXT)) {
+			return (IEclipseContext) part.getTransientData().get(
+					ModelUtils.CONTAINING_CONTEXT);
 		}
 		return getContextForParent(part);
 	}

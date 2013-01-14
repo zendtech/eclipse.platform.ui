@@ -28,6 +28,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 
 public class ModelUtils {
+	public static final String CONTAINING_CONTEXT = "ModelUtils.containingContext";
+	
 	public static EClassifier getTypeArgument(EClass eClass,
 			EGenericType eGenericType) {
 		ETypeParameter eTypeParameter = eGenericType.getETypeParameter();
@@ -183,6 +185,10 @@ public class ModelUtils {
 		while (curParent != null) {
 			if (curParent instanceof MContext) {
 				return ((MContext) curParent).getContext();
+			}
+			
+			if (curParent.getTransientData().containsKey(CONTAINING_CONTEXT)) {
+				return (IEclipseContext) curParent.getTransientData().get(CONTAINING_CONTEXT);
 			}
 
 			if ( (curParent instanceof MUIElement) && ((MUIElement)curParent).getCurSharedRef() != null)
