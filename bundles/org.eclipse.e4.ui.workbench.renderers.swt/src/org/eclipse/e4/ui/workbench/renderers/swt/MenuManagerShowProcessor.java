@@ -19,6 +19,7 @@ import org.eclipse.e4.ui.internal.workbench.swt.WorkbenchSWTActivator;
 import org.eclipse.e4.ui.model.application.ui.MContext;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MPopupMenu;
+import org.eclipse.e4.ui.model.internal.ModelUtils;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.swt.factories.IRendererFactory;
 import org.eclipse.jface.action.IMenuListener2;
@@ -133,6 +134,10 @@ public class MenuManagerShowProcessor implements IMenuListener2 {
 		final IEclipseContext evalContext;
 		if (menuModel instanceof MContext) {
 			evalContext = ((MContext) menuModel).getContext();
+		} else if (menuModel.getTransientData().containsKey(
+				ModelUtils.CONTAINING_CONTEXT)) {
+			evalContext = (IEclipseContext) menuModel.getTransientData().get(
+					ModelUtils.CONTAINING_CONTEXT);
 		} else {
 			evalContext = modelService.getContainingContext(menuModel);
 		}
