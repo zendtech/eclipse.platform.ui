@@ -1109,8 +1109,9 @@ public class ESelectionServiceTest extends UITest {
 		});
 		application.setContext(applicationContext);
 		E4Workbench.processHierarchy(application);
-		((Notifier) application).eAdapters().add(
-				new UIEventPublisher(applicationContext));
+		final UIEventPublisher ep = new UIEventPublisher(applicationContext);
+		((Notifier) application).eAdapters().add(ep);
+		applicationContext.set(UIEventPublisher.class, ep);
 	}
 
 	static class SelectionListener implements ISelectionListener {

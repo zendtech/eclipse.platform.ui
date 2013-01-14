@@ -32,6 +32,7 @@ import org.eclipse.e4.ui.model.application.ui.menu.MItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MRenderedMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolItem;
+import org.eclipse.e4.ui.model.internal.ModelUtils;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.e4.ui.workbench.IResourceUtilities;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
@@ -544,6 +545,10 @@ public class DirectContributionItem extends ContributionItem {
 	protected IEclipseContext getContext(MUIElement part) {
 		if (part instanceof MContext) {
 			return ((MContext) part).getContext();
+		} else if (part.getTransientData().containsKey(
+				ModelUtils.CONTAINING_CONTEXT)) {
+			return (IEclipseContext) part.getTransientData().get(
+					ModelUtils.CONTAINING_CONTEXT);
 		}
 		return getContextForParent(part);
 	}

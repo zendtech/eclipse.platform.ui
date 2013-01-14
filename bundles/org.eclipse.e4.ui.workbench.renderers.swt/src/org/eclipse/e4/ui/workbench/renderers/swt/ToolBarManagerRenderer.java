@@ -339,8 +339,7 @@ public class ToolBarManagerRenderer extends SWTPartRenderer {
 			return false;
 		}
 		if (record.anyVisibleWhen()) {
-			final IEclipseContext parentContext = modelService
-					.getContainingContext(toolbarModel);
+			final IEclipseContext parentContext = getContext(toolbarModel);
 			parentContext.runAndTrack(new RunAndTrack() {
 				@Override
 				public boolean changed(IEclipseContext context) {

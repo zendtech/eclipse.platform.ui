@@ -20,6 +20,7 @@ import org.eclipse.core.expressions.IEvaluationContext;
 import org.eclipse.e4.core.contexts.ContextFunction;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.internal.workbench.ContributionsAnalyzer;
+import org.eclipse.e4.ui.internal.workbench.UIEventPublisher;
 import org.eclipse.e4.ui.internal.workbench.swt.AbstractPartRenderer;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.MApplicationElement;
@@ -40,6 +41,7 @@ import org.eclipse.e4.ui.workbench.renderers.swt.MenuManagerRenderer;
 import org.eclipse.e4.ui.workbench.renderers.swt.ToolBarContributionRecord;
 import org.eclipse.e4.ui.workbench.renderers.swt.ToolBarManagerRenderer;
 import org.eclipse.e4.ui.workbench.swt.factories.IRendererFactory;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jface.action.ContributionManager;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
@@ -364,6 +366,7 @@ public class WorkbenchMenuService implements IMenuService {
 		}
 		toolbars.add(tb);
 		tb.getTransientData().put(ModelUtils.CONTAINING_CONTEXT, ctx);
+		((Notifier) tb).eAdapters().add(ctx.get(UIEventPublisher.class));
 	}
 
 	private void addMenu(MApplicationElement model, MMenu menu, IEclipseContext ctx) {
@@ -377,6 +380,7 @@ public class WorkbenchMenuService implements IMenuService {
 		}
 		menus.add(menu);
 		menu.getTransientData().put(ModelUtils.CONTAINING_CONTEXT, ctx);
+		((Notifier) menu).eAdapters().add(ctx.get(UIEventPublisher.class));
 	}
 
 	protected MMenu getMenuModel(MenuManager menuManager, MenuLocationURI location) {

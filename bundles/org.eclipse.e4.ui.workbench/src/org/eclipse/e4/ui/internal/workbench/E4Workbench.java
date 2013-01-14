@@ -70,6 +70,7 @@ public class E4Workbench implements IWorkbench {
 		}
 
 		uiEventPublisher = new UIEventPublisher(appContext);
+		appContext.set(UIEventPublisher.class, uiEventPublisher);
 		((Notifier) uiRoot).eAdapters().add(uiEventPublisher);
 	}
 
