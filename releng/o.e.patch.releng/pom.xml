@@ -25,5 +25,6 @@
     <module>../../bundles/org.eclipse.jface</module>
     <module>../../bundles/org.eclipse.ui.workbench</module>
     <module>../o.e.patch</module>
+    <module>../o.e.patch.repo</module>
   </modules>
 </project>

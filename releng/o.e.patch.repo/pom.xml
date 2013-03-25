@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>eclipse.platform.ui</groupId>
+    <artifactId>eclipse.platform.ui</artifactId>
+    <version>3.6.3-SNAPSHOT</version>
+    <relativePath>../../</relativePath>
+  </parent>
+
+  <groupId>o.e.patch</groupId>
+  <artifactId>o.e.patch.repo</artifactId>
+  <version>1.0.0.qualifier</version>
+  <packaging>eclipse-repository</packaging>
+
+  <name>patch update site</name>
+
+</project>
+

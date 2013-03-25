@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/o.e.patch_1.0.0.qualifier.jar" id="o.e.patch" version="1.0.0.qualifier">
+      <category name="o.e.patch.category"/>
+   </feature>
+   <category-def name="o.e.patch.category" label="Patches"/>
+</site>
+
