@@ -28,6 +28,11 @@
                 <id>org.eclipse.e4.rcp</id>
                 <versionRange>1.1.2</versionRange>
               </requirement>
+              <requirement>
+                <type>eclipse-feature</type>
+                <id>org.eclipse.rcp</id>
+                <versionRange>4.2.2</versionRange>
+              </requirement>
             </extraRequirements>
           </dependency-resolution>
         </configuration>

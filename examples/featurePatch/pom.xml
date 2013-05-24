@@ -44,6 +44,7 @@
  
   <modules>
     <module>org.eclipse.e4.rcp.r422.feature</module>
+    <module>org.eclipse.rcp.r422.feature</module>
     <module>org.eclipse.e4.ui.r422.update</module>
   </modules>
 
