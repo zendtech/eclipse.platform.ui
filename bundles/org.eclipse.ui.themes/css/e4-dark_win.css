@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2014 Andrea Guarinoni and others.
+ * Copyright (c) 2010, 2015 Andrea Guarinoni and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,6 +20,10 @@
 @import url("platform:/plugin/org.eclipse.ui.themes/css/dark/e4-dark_globalstyle.css"); /* Remove this to have ONLY the main IDE shell dark */
 @import url("platform:/plugin/org.eclipse.ui.themes/css/dark/e4-dark_partstyle.css");
 
+Tree {
+	swt-tree-arrows-fg-color:#cccccc;
+	swt-tree-arrows-mode: triangle; /* triangle or square */
+}
 
 .MTrimmedWindow.topLevel {
     margin-top: 3px;
