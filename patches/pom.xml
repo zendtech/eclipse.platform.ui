@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.eclipse</groupId>
+    <artifactId>eclipse-platform-parent</artifactId>
+    <version>4.4.0-SNAPSHOT</version>
+    <relativePath>../eclipse-platform-parent</relativePath>
+  </parent>
+
+  <groupId>eclipse.platform.ui</groupId>
+  <artifactId>eclipse.platform.ui.patches</artifactId>
+  <version>4.4.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+   <properties>
+     <tycho.scmUrl>scm:git:git://git.eclipse.org/gitroot/platform/eclipse.platform.ui.git</tycho.scmUrl>
+  </properties>
+
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>eclipse-hosted</id>
+      <url>https://repo.eclipse.org/content/repositories/eclipse/</url>
+    </repository>
+    <repository>
+      <id>luna</id>
+      <layout>p2</layout>
+      <url>http://download.eclipse.org/eclipse/updates/4.4/R-4.4.2-201502041700</url>
+    </repository>
+  </repositories>
+
+  <modules>
+    <module>../bundles/org.eclipse.e4.ui.css.swt</module>
+    <module>../bundles/org.eclipse.ui.themes</module>
+    <module>org.eclipse.e4.rcp.feature.patch</module>
+    <module>org.eclipse.platform.feature.patch</module>
+    <module>org.eclipse.platform.ui.patches.repository</module>
+  </modules>
+
+</project>
